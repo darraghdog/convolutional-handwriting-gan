@@ -28,5 +28,12 @@ docker build -t scrabblegan -f DockerFile.docker .
 cd ..
 docker run -itd --name SCRABBLEV01 -v $PWD:/mount  --shm-size=128G --gpus '"device=4"' --rm scrabblegan:latest
 docker attach SCRABBLEV01
+# Create dataset database
+python data/create_text_data.py 
+# Start training - supervised only
+python train.py --name_prefix demo --dataname IAMcharH32W16rmPunct --capitalize --no_html --gpu_ids 0 batch_size 16
+
+#python train_semi_supervised.py --dataname IAMcharH32W16rmPunct --unlabeled_dataname CVLtrH32 --disjoint
+
 '
 

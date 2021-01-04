@@ -109,8 +109,10 @@ if __name__ == '__main__':
                 model.save_networks(save_suffix)
 
             for i in opt.gpu_ids:
-                with torch.cuda.device('cuda:%f' % (i)):
+                with torch.cuda.device(f'cuda:{i}'):
                     torch.cuda.empty_cache()
+                #with torch.cuda.device('cuda:%f' % (i)):
+                #    torch.cuda.empty_cache()
 
             iter_data_time = time.time()
         if epoch % opt.save_epoch_freq == 0:              # cache our model every <save_epoch_freq> epochs
