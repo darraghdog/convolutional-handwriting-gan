@@ -1,0 +1,1689 @@
+nohup: ignoring input
+----------------- Options ---------------
+                   BN_eps: 1e-05                         
+                     D_B1: 0.0                           
+                     D_B2: 0.999                         
+                   D_attn: 64                            
+                     D_ch: 64                            
+                  D_depth: 1                             
+                   D_fp16: False                         
+                   D_init: N02                           
+                     D_lr: 0.0002                        
+        D_mixed_precision: False                         
+                     D_nl: relu                          
+                  D_ortho: 0.0                           
+                  D_param: SN                            
+                   D_wide: True                          
+                     G_B1: 0.0                           
+                     G_B2: 0.999                         
+                   G_attn: 64                            
+             G_batch_size: 0                             
+                     G_ch: 64                            
+                  G_depth: 1                             
+                   G_fp16: False                         
+                   G_init: N02                           
+                     G_lr: 0.0002                        
+        G_mixed_precision: False                         
+                     G_nl: relu                          
+                  G_ortho: 0.0                           
+                  G_param: SN                            
+                 G_shared: False                         
+                   OCR_B1: 0.0                           
+                   OCR_B2: 0.999                         
+                 OCR_init: N02                           
+                   OCR_lr: 0.0002                        
+            OCR_output_nc: 512                           
+                   SN_eps: 1e-08                         
+         accumulate_stats: False                         
+                 adam_eps: 1e-08                         
+                 alphabet: Only thewigsofrcvdampbkuq.A-210xT5'MDL,RYHJ"ISPWENj&BC93VGFKz();#:!7U64Q8?+*ZX/%	[default: alphabet]
+                      aug: False                         
+             aug_dataroot: None                          
+               batch_size: 16                            	[default: 8]
+                    beta1: 0.5                           
+                bn_linear: SN                            
+            bottom_height: 4                             
+             bottom_width: 4                             
+               capitalize: True                          	[default: False]
+          checkpoints_dir: ./checkpoints                 
+                clip_grad: 0.0                           
+                  collate: True                          
+           continue_train: False                         
+                crop_size: 32                            
+            cross_replica: False                         
+                 dataname: IAMcharH32W16rmPunct          	[default: RIMEScharH32W16]
+                 dataroot: Datasets/IAM/words/h32char16to17/tr_removePunc	[default: None]
+             dataset_mode: text                          
+                    dim_z: 128                           
+                 disjoint: False                         
+              display_env: main                          
+             display_freq: 400                           
+               display_id: 1                             
+            display_ncols: 4                             
+             display_port: 8096                          
+           display_server: http://localhost              
+          display_winsize: 256                           
+                    epoch: latest                        
+              epoch_count: 1                             
+              first_layer: True                          
+                     flip: False                         
+                 gan_mode: lsgan                         
+                 gb_alpha: 1                             
+                  gpu_ids: 0                             
+          hidden_size_OCR: 256                           
+                     imgH: 32                            
+                 input_nc: 1                             
+                  isTrain: True                          	[default: None]
+                  labeled: True                          
+                len_vocab: 80                            	[default: None]
+                      lex: Datasets/Lexicon/english_words.txt	[default: ]
+              load_in_mem: False                         
+                load_iter: 0                             	[default: 0]
+                load_size: 32                            
+                       lr: 0.0002                        
+           lr_decay_iters: 50                            
+                lr_policy: linear                        
+                mask_loss: False                         
+         max_dataset_size: inf                           
+                    model: ScrabbleGAN                   
+                     mybn: False                         
+                     name: demo_IAMcharH32W16rmPunct_CapitalizeLex_GANres16_bs16	[default: ]
+              name_prefix: demo                          	[default: ]
+                    niter: 100                           
+              niter_decay: 100                           
+          no_grad_balance: False                         
+                  no_hier: False                         
+                  no_html: True                          	[default: False]
+               no_shuffle: False                         
+               norm_style: bn                            
+           not_optimize_G: False                         
+            num_D_SV_itrs: 1                             
+                num_D_SVs: 1                             
+              num_D_steps: 2                             
+            num_G_SV_itrs: 1                             
+                num_G_SVs: 1                             
+        num_accumulations: 1                             
+         num_critic_train: 4                             
+               num_epochs: 100                           
+           num_layers_OCR: 1                             
+num_standing_accumulations: 16                            
+              num_threads: 4                             
+              num_workers: 8                             
+                  one_hot: True                          
+                one_hot_k: 1                             
+                  onlyOCR: False                         
+               optimize_z: False                         
+                 parallel: False                         
+          percent_labeled: 100                           
+                    phase: train                         
+               pin_memory: True                          
+                pool_size: 50                            
+               preprocess: no_preprocess                 
+               print_freq: 100                           
+                randChars: False                         
+             reconst_loss: mse                           
+               resolution: 16                            	[default: 16]
+             save_by_iter: False                         
+          save_epoch_freq: 5                             
+         save_latest_freq: 5000                          
+              saved_model:                               
+                     seed: 0                             
+           serial_batches: False                         
+               shared_dim: 0                             
+            single_writer: False                         
+                skip_init: False                         
+                  split_D: False                         
+                   suffix:                               
+            test_dataroot: datasets/RIMEStest_prepared_height32varyingWidth/
+             toggle_grads: True                          
+                    train: True                          
+       unlabeled_dataname: None                          
+         update_html_freq: 1000                          
+   use_multiepoch_sampler: False                         
+                  use_rnn: False                         
+             val_dataroot: datasets/RIMESval_prepared_height32varyingWidth/
+                  verbose: False                         
+                   z_dist: normal                        
+                    z_var: 1.0                           
+----------------- End -------------------Setting up a new session...
+
+dataset [TextDataset] was created
+The number of training images = 47338
+initialize network with N02
+initialize network with N02
+Generator(
+  (activation): ReLU()
+  (shared): identity()
+  (linear): SNLinear(in_features=2560, out_features=8192, bias=True)
+  (blocks): ModuleList(
+    (0): ModuleList(
+      (0): GBlock(
+        (activation): ReLU()
+        (conv1): SNConv2d(512, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (conv2): SNConv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (conv_sc): SNConv2d(512, 256, kernel_size=(1, 1), stride=(1, 1))
+        (bn1): ccbn(
+          out: 512, in: 32, cross_replica=False
+          (gain): SNLinear(in_features=32, out_features=512, bias=False)
+          (bias): SNLinear(in_features=32, out_features=512, bias=False)
+        )
+        (bn2): ccbn(
+          out: 256, in: 32, cross_replica=False
+          (gain): SNLinear(in_features=32, out_features=256, bias=False)
+          (bias): SNLinear(in_features=32, out_features=256, bias=False)
+        )
+      )
+    )
+    (1): ModuleList(
+      (0): GBlock(
+        (activation): ReLU()
+        (conv1): SNConv2d(256, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (conv2): SNConv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (conv_sc): SNConv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+        (bn1): ccbn(
+          out: 256, in: 32, cross_replica=False
+          (gain): SNLinear(in_features=32, out_features=256, bias=False)
+          (bias): SNLinear(in_features=32, out_features=256, bias=False)
+        )
+        (bn2): ccbn(
+          out: 128, in: 32, cross_replica=False
+          (gain): SNLinear(in_features=32, out_features=128, bias=False)
+          (bias): SNLinear(in_features=32, out_features=128, bias=False)
+        )
+      )
+    )
+    (2): ModuleList(
+      (0): GBlock(
+        (activation): ReLU()
+        (conv1): SNConv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (conv2): SNConv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+        (conv_sc): SNConv2d(128, 64, kernel_size=(1, 1), stride=(1, 1))
+        (bn1): ccbn(
+          out: 128, in: 32, cross_replica=False
+          (gain): SNLinear(in_features=32, out_features=128, bias=False)
+          (bias): SNLinear(in_features=32, out_features=128, bias=False)
+        )
+        (bn2): ccbn(
+          out: 64, in: 32, cross_replica=False
+          (gain): SNLinear(in_features=32, out_features=64, bias=False)
+          (bias): SNLinear(in_features=32, out_features=64, bias=False)
+        )
+      )
+    )
+  )
+  (output_layer): Sequential(
+    (0): bn()
+    (1): ReLU()
+    (2): SNConv2d(64, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+  )
+)
+initialize network with N02
+Discriminator(
+  (activation): ReLU()
+  (blocks): ModuleList(
+    (0): ModuleList(
+      (0): DBlock(
+        (activation): ReLU()
+        (downsample): AvgPool2d(kernel_size=2, stride=2, padding=0)
+        (conv1): SNConv2d(1, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (conv2): SNConv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (conv_sc): SNConv2d(1, 64, kernel_size=(1, 1), stride=(1, 1))
+      )
+    )
+    (1): ModuleList(
+      (0): DBlock(
+        (activation): ReLU()
+        (downsample): AvgPool2d(kernel_size=2, stride=2, padding=0)
+        (conv1): SNConv2d(64, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (conv2): SNConv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (conv_sc): SNConv2d(64, 512, kernel_size=(1, 1), stride=(1, 1))
+      )
+    )
+    (2): ModuleList(
+      (0): DBlock(
+        (activation): ReLU()
+        (downsample): AvgPool2d(kernel_size=2, stride=2, padding=0)
+        (conv1): SNConv2d(512, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (conv2): SNConv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (conv_sc): SNConv2d(512, 1024, kernel_size=(1, 1), stride=(1, 1))
+      )
+    )
+    (3): ModuleList(
+      (0): DBlock(
+        (activation): ReLU()
+        (conv1): SNConv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (conv2): SNConv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+    )
+  )
+  (linear): SNLinear(in_features=1024, out_features=1, bias=True)
+  (embed): SNLinear(in_features=80, out_features=1024, bias=True)
+)
+model [ScrabbleGANModel] was created
+---------- Networks initialized -------------
+[Network G] Total number of parameters : 23.529 M
+[Network D] Total number of parameters : 36.370 M
+[Network OCR] Total number of parameters : 5.592 M
+-----------------------------------------------
+######## fake images OCR prediction ########
+--,AAABBBBBAABBBBBBBBBBBBB"VB => ,ABAB"VB            , gt: citolas             
+----""AA""""""""AAA""""---"-" => "A"A"""             , gt: babis               
+######## real images OCR prediction ########
+9A----MMM"""MA""AAMMMMMAAAA"N => 9AM"MA"AMA"N        , gt: friends             
+,-A-----------M"""BBBBBBBB"AA => ,AM"B"A             , gt: This                
+,-A---M----M""BBBBBBBBBBBB"AA => ,AMM"B"A            , gt: not                 
+(epoch: 1, iters: 400, time: 0.046, data: 0.192) G: 0.650 D: 4.049 Dreal: 0.000 Dfake: 4.049 OCR_real: 1.775 OCR_fake: 0.006 grad_fake_OCR: 0.004 grad_fake_adv: 0.018 
+######## fake images OCR prediction ########
+--"AAAAAAAAAAAAAAAAAAAABBt--- => "ABt                , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+----------------------------- =>                     , gt: Chambre             
+-------------"BAAAAAAAABBt--- => "BABt               , gt: had                 
+-------------"BBAAAAAAABBt--- => "BABt               , gt: The                 
+(epoch: 1, iters: 800, time: 0.010, data: 0.000) G: -1.438 D: 3.353 Dreal: 3.353 Dfake: 0.000 OCR_real: 13.755 OCR_fake: 0.057 grad_fake_OCR: 0.009 grad_fake_adv: 0.024 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------- =>                     , gt: lends               
+------------------------------------- =>                     , gt: are                 
+------------------------------------- =>                     , gt: the                 
+(epoch: 1, iters: 1200, time: 0.011, data: 0.000) G: 2.884 D: 2.870 Dreal: 2.870 Dfake: 0.000 OCR_real: 5.135 OCR_fake: 0.008 grad_fake_OCR: 0.002 grad_fake_adv: 0.010 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+----------------------------------------------------- =>                     , gt: be                  
+----------------------------------------------------- =>                     , gt: and                 
+----------------------------------------------------- =>                     , gt: stage               
+(epoch: 1, iters: 1600, time: 0.012, data: 0.000) G: 8.026 D: 1.406 Dreal: 0.000 Dfake: 1.406 OCR_real: 4.440 OCR_fake: 0.026 grad_fake_OCR: 0.005 grad_fake_adv: 0.026 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------------------- =>                     , gt: Space               
+------------------------------------------------- =>                     , gt: will                
+------------------------------------------------- =>                     , gt: Are                 
+(epoch: 1, iters: 2000, time: 0.021, data: 0.000) G: -2.824 D: 3.422 Dreal: 0.000 Dfake: 3.422 OCR_real: 6.799 OCR_fake: 0.029 grad_fake_OCR: 0.001 grad_fake_adv: 0.002 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--------------------------------------------- =>                     , gt: am                  
+--------------------------------------------- =>                     , gt: joined              
+--------------------------------------------- =>                     , gt: a                   
+(epoch: 1, iters: 2400, time: 0.011, data: 0.000) G: 0.464 D: 1.613 Dreal: 1.581 Dfake: 0.032 OCR_real: 7.526 OCR_fake: 0.064 grad_fake_OCR: 0.002 grad_fake_adv: 0.006 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------------------- =>                     , gt: will                
+------------------------------------------------- =>                     , gt: understand          
+------------------------------------------------- =>                     , gt: atomic              
+(epoch: 1, iters: 2800, time: 0.011, data: 0.000) G: -0.761 D: 0.989 Dreal: 0.643 Dfake: 0.346 OCR_real: 8.022 OCR_fake: 0.055 grad_fake_OCR: 0.004 grad_fake_adv: 0.006 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--------------------------------- =>                     , gt: cent                
+--------------------------------- =>                     , gt: long                
+--------------------------------- =>                     , gt: National            
+(epoch: 1, iters: 3200, time: 0.010, data: 0.000) G: -0.057 D: 1.303 Dreal: 1.253 Dfake: 0.051 OCR_real: 7.683 OCR_fake: 0.189 grad_fake_OCR: 0.006 grad_fake_adv: 0.010 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+----------------------------------------- =>                     , gt: whom                
+----------------------------------------- =>                     , gt: on                  
+----------------------------------------- =>                     , gt: her                 
+(epoch: 1, iters: 3600, time: 0.106, data: 0.000) G: 0.520 D: 0.334 Dreal: 0.098 Dfake: 0.235 OCR_real: 9.182 OCR_fake: 0.471 grad_fake_OCR: 0.023 grad_fake_adv: 0.029 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--------------------------------------------- =>                     , gt: touch               
+--------------------------------------------- =>                     , gt: nearly              
+--------------------------------------------- =>                     , gt: Philpot             
+(epoch: 1, iters: 4000, time: 0.011, data: 0.000) G: 3.062 D: 0.815 Dreal: 0.014 Dfake: 0.802 OCR_real: 9.810 OCR_fake: 0.426 grad_fake_OCR: 0.018 grad_fake_adv: 0.023 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--------------------------------------------- =>                     , gt: is                  
+--------------------------------------------- =>                     , gt: bring               
+--------------------------------------------- =>                     , gt: divine              
+(epoch: 1, iters: 4400, time: 0.011, data: 0.000) G: 1.004 D: 0.540 Dreal: 0.028 Dfake: 0.512 OCR_real: 10.759 OCR_fake: 0.623 grad_fake_OCR: 0.030 grad_fake_adv: 0.034 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+----------------------------------------- =>                     , gt: altogether          
+----------------------------------------- =>                     , gt: ensure              
+----------------------------------------- =>                     , gt: well                
+(epoch: 1, iters: 4800, time: 0.011, data: 0.000) G: -2.886 D: 0.467 Dreal: 0.467 Dfake: 0.000 OCR_real: 10.796 OCR_fake: 0.321 grad_fake_OCR: 0.021 grad_fake_adv: 0.021 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--------------------------------------------- =>                     , gt: the                 
+--------------------------------------------- =>                     , gt: as                  
+--------------------------------------------- =>                     , gt: This                
+(epoch: 1, iters: 5200, time: 0.018, data: 0.000) G: 1.586 D: 0.207 Dreal: 0.068 Dfake: 0.140 OCR_real: 11.888 OCR_fake: 0.918 grad_fake_OCR: 0.094 grad_fake_adv: 0.096 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------- =>                     , gt: as                  
+------------------------------------- =>                     , gt: fur-                
+------------------------------------- =>                     , gt: supposed            
+(epoch: 1, iters: 5600, time: 0.010, data: 0.000) G: 1.859 D: 0.043 Dreal: 0.042 Dfake: 0.001 OCR_real: 12.020 OCR_fake: 2.153 grad_fake_OCR: 0.104 grad_fake_adv: 0.107 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+----------------------------------------- =>                     , gt: accepted            
+----------------------------------------- =>                     , gt: winter              
+----------------------------------------- =>                     , gt: had                 
+(epoch: 1, iters: 6000, time: 0.011, data: 0.000) G: 4.300 D: 0.310 Dreal: 0.310 Dfake: 0.000 OCR_real: 12.065 OCR_fake: 1.640 grad_fake_OCR: 0.042 grad_fake_adv: 0.044 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+----------------------------------------- =>                     , gt: sailing             
+----------------------------------------- =>                     , gt: for                 
+----------------------------------------- =>                     , gt: for                 
+(epoch: 1, iters: 6400, time: 0.011, data: 0.000) G: 2.278 D: 0.292 Dreal: 0.000 Dfake: 0.292 OCR_real: 12.501 OCR_fake: 3.236 grad_fake_OCR: 0.061 grad_fake_adv: 0.061 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+----------------------------------------- =>                     , gt: by                  
+----------------------------------------- =>                     , gt: A                   
+----------------------------------------- =>                     , gt: lavish              
+(epoch: 1, iters: 6800, time: 0.019, data: 0.000) G: 2.934 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 13.072 OCR_fake: 3.125 grad_fake_OCR: 0.125 grad_fake_adv: 0.126 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+----------------------------------------- =>                     , gt: summoned            
+----------------------------------------- =>                     , gt: all                 
+----------------------------------------- =>                     , gt: thought             
+(epoch: 1, iters: 7200, time: 0.017, data: 0.000) G: 2.713 D: 0.109 Dreal: 0.089 Dfake: 0.020 OCR_real: 14.336 OCR_fake: 2.682 grad_fake_OCR: 0.094 grad_fake_adv: 0.098 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+----------------------------- =>                     , gt: they                
+----------------------------- =>                     , gt: trouble             
+----------------------------- =>                     , gt: whom                
+(epoch: 1, iters: 7600, time: 0.009, data: 0.000) G: 5.965 D: 2.376 Dreal: 0.000 Dfake: 2.376 OCR_real: 9.884 OCR_fake: 0.472 grad_fake_OCR: 0.036 grad_fake_adv: 0.037 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------- =>                     , gt: ment                
+------------------------------------- =>                     , gt: grow                
+------------------------------------- =>                     , gt: really              
+(epoch: 1, iters: 8000, time: 0.011, data: 0.000) G: -0.145 D: 0.627 Dreal: 0.627 Dfake: 0.000 OCR_real: 13.097 OCR_fake: 0.787 grad_fake_OCR: 0.020 grad_fake_adv: 0.020 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--------------------------------- =>                     , gt: wet                 
+--------------------------------- =>                     , gt: his                 
+--------------------------------- =>                     , gt: Roy                 
+(epoch: 1, iters: 8400, time: 0.024, data: 0.000) G: 0.999 D: 0.446 Dreal: 0.000 Dfake: 0.446 OCR_real: 12.314 OCR_fake: 2.815 grad_fake_OCR: 0.064 grad_fake_adv: 0.065 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+----------------------------------------- =>                     , gt: a                   
+----------------------------------------- =>                     , gt: unorthodox          
+----------------------------------------- =>                     , gt: in                  
+(epoch: 1, iters: 8800, time: 0.010, data: 0.000) G: 1.925 D: 0.351 Dreal: 0.146 Dfake: 0.205 OCR_real: 13.191 OCR_fake: 0.218 grad_fake_OCR: 0.023 grad_fake_adv: 0.023 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--------------------------------------------------------- =>                     , gt: by                  
+--------------------------------------------------------- =>                     , gt: Thorneycroft's      
+--------------------------------------------------------- =>                     , gt: said                
+(epoch: 1, iters: 9200, time: 0.012, data: 0.000) G: 2.840 D: 0.593 Dreal: 0.593 Dfake: 0.000 OCR_real: 18.201 OCR_fake: 2.299 grad_fake_OCR: 0.063 grad_fake_adv: 0.067 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------------------- =>                     , gt: a                   
+------------------------------------------------- =>                     , gt: concentrated        
+------------------------------------------------- =>                     , gt: who                 
+(epoch: 1, iters: 9600, time: 0.011, data: 0.000) G: 1.628 D: 1.267 Dreal: 1.267 Dfake: 0.000 OCR_real: 15.300 OCR_fake: 2.373 grad_fake_OCR: 0.091 grad_fake_adv: 0.096 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+----------------------------------------------------- =>                     , gt: quite               
+----------------------------------------------------- =>                     , gt: turtle-doves        
+----------------------------------------------------- =>                     , gt: depending           
+(epoch: 1, iters: 10000, time: 0.020, data: 0.000) G: 4.167 D: 1.116 Dreal: 1.116 Dfake: 0.000 OCR_real: 17.497 OCR_fake: 4.753 grad_fake_OCR: 0.067 grad_fake_adv: 0.071 
+saving the latest model (epoch 1, total_iters 10000)
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+----------------------------------------- =>                     , gt: Abou                
+----------------------------------------- =>                     , gt: together            
+----------------------------------------- =>                     , gt: gay                 
+(epoch: 1, iters: 10400, time: 0.011, data: 0.000) G: 4.799 D: 0.126 Dreal: 0.066 Dfake: 0.060 OCR_real: 14.026 OCR_fake: 3.049 grad_fake_OCR: 0.060 grad_fake_adv: 0.063 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------------------- =>                     , gt: more                
+------------------------------------------------- =>                     , gt: 2ole                
+------------------------------------------------- =>                     , gt: the                 
+(epoch: 1, iters: 10800, time: 0.011, data: 0.000) G: 4.832 D: 0.186 Dreal: 0.157 Dfake: 0.029 OCR_real: 11.241 OCR_fake: 2.741 grad_fake_OCR: 0.035 grad_fake_adv: 0.037 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--------------------------------- =>                     , gt: at                  
+--------------------------------- =>                     , gt: are                 
+--------------------------------- =>                     , gt: and                 
+(epoch: 1, iters: 11200, time: 0.010, data: 0.000) G: 1.084 D: 0.881 Dreal: 0.881 Dfake: 0.000 OCR_real: 13.532 OCR_fake: 3.570 grad_fake_OCR: 0.055 grad_fake_adv: 0.056 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+----------------------------------------- =>                     , gt: the                 
+----------------------------------------- =>                     , gt: supporting          
+----------------------------------------- =>                     , gt: military            
+(epoch: 1, iters: 11600, time: 0.019, data: 0.000) G: 0.469 D: 1.015 Dreal: 0.000 Dfake: 1.015 OCR_real: 11.390 OCR_fake: 3.230 grad_fake_OCR: 0.065 grad_fake_adv: 0.066 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------- =>                     , gt: allowed             
+------------------------------------- =>                     , gt: lot                 
+------------------------------------- =>                     , gt: generated           
+(epoch: 1, iters: 12000, time: 0.010, data: 0.000) G: 2.618 D: 0.418 Dreal: 0.072 Dfake: 0.346 OCR_real: 15.629 OCR_fake: 3.699 grad_fake_OCR: 0.034 grad_fake_adv: 0.035 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+----------------------------- =>                     , gt: dinghy              
+----------------------------- =>                     , gt: the                 
+----------------------------- =>                     , gt: America             
+(epoch: 1, iters: 12400, time: 0.010, data: 0.000) G: 3.796 D: 0.066 Dreal: 0.066 Dfake: 0.000 OCR_real: 14.367 OCR_fake: 1.079 grad_fake_OCR: 0.051 grad_fake_adv: 0.052 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--------------------------------------------- =>                     , gt: the                 
+--------------------------------------------- =>                     , gt: the                 
+--------------------------------------------- =>                     , gt: had                 
+(epoch: 1, iters: 12800, time: 0.011, data: 0.000) G: -0.331 D: 0.265 Dreal: 0.046 Dfake: 0.219 OCR_real: 15.638 OCR_fake: 2.053 grad_fake_OCR: 0.076 grad_fake_adv: 0.077 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+----------------------------------------------------- =>                     , gt: for                 
+----------------------------------------------------- =>                     , gt: and                 
+----------------------------------------------------- =>                     , gt: though              
+(epoch: 1, iters: 13200, time: 0.020, data: 0.000) G: 4.536 D: 0.888 Dreal: 0.794 Dfake: 0.094 OCR_real: 15.917 OCR_fake: 0.670 grad_fake_OCR: 0.047 grad_fake_adv: 0.047 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------------------- =>                     , gt: he                  
+------------------------------------------------- =>                     , gt: carry               
+------------------------------------------------- =>                     , gt: Mr.                 
+(epoch: 1, iters: 13600, time: 0.011, data: 0.000) G: 2.338 D: 0.242 Dreal: 0.242 Dfake: 0.000 OCR_real: 15.419 OCR_fake: 2.806 grad_fake_OCR: 0.087 grad_fake_adv: 0.087 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------- =>                     , gt: threat              
+------------------------------------- =>                     , gt: being               
+------------------------------------- =>                     , gt: will                
+(epoch: 1, iters: 14000, time: 0.010, data: 0.000) G: 0.934 D: 1.851 Dreal: 0.000 Dfake: 1.851 OCR_real: 12.821 OCR_fake: 3.845 grad_fake_OCR: 0.052 grad_fake_adv: 0.053 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------- =>                     , gt: and                 
+------------------------------------- =>                     , gt: kingdom             
+------------------------------------- =>                     , gt: Mauro               
+(epoch: 1, iters: 14400, time: 0.010, data: 0.000) G: 2.275 D: 0.011 Dreal: 0.011 Dfake: 0.000 OCR_real: 15.499 OCR_fake: 7.087 grad_fake_OCR: 0.042 grad_fake_adv: 0.042 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------- =>                     , gt: little              
+------------------------------------- =>                     , gt: lady                
+------------------------------------- =>                     , gt: Herr                
+(epoch: 1, iters: 14800, time: 0.019, data: 0.000) G: 3.665 D: 0.085 Dreal: 0.052 Dfake: 0.034 OCR_real: 13.968 OCR_fake: 4.022 grad_fake_OCR: 0.048 grad_fake_adv: 0.049 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------- =>                     , gt: man                 
+------------------------- =>                     , gt: like                
+------------------------- =>                     , gt: to                  
+(epoch: 1, iters: 15200, time: 0.009, data: 0.000) G: 3.491 D: 0.237 Dreal: 0.000 Dfake: 0.237 OCR_real: 9.896 OCR_fake: 0.866 grad_fake_OCR: 0.065 grad_fake_adv: 0.072 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------- =>                     , gt: and                 
+------------------------------------- =>                     , gt: zone                
+------------------------------------- =>                     , gt: from                
+(epoch: 1, iters: 15600, time: 0.010, data: 0.000) G: 1.143 D: 0.989 Dreal: 0.000 Dfake: 0.989 OCR_real: 12.868 OCR_fake: 16.388 grad_fake_OCR: 0.056 grad_fake_adv: 0.057 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--------------------------------- =>                     , gt: in                  
+--------------------------------- =>                     , gt: up                  
+--------------------------------- =>                     , gt: old                 
+(epoch: 1, iters: 16000, time: 0.010, data: 0.000) G: 2.678 D: 1.750 Dreal: 0.000 Dfake: 1.750 OCR_real: 13.161 OCR_fake: 4.365 grad_fake_OCR: 0.059 grad_fake_adv: 0.060 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--------------------------------------------------------- =>                     , gt: National            
+--------------------------------------------------------- =>                     , gt: was                 
+--------------------------------------------------------- =>                     , gt: around              
+(epoch: 1, iters: 16400, time: 0.021, data: 0.000) G: 1.907 D: 1.527 Dreal: 1.527 Dfake: 0.000 OCR_real: 21.398 OCR_fake: 2.508 grad_fake_OCR: 0.057 grad_fake_adv: 0.057 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+----------------------------------------- =>                     , gt: life                
+----------------------------------------- =>                     , gt: households          
+----------------------------------------- =>                     , gt: a                   
+(epoch: 1, iters: 16800, time: 0.011, data: 0.000) G: 1.623 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 15.928 OCR_fake: 9.941 grad_fake_OCR: 0.085 grad_fake_adv: 0.085 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--------------------------------- =>                     , gt: gauge               
+--------------------------------- =>                     , gt: Anglesey            
+--------------------------------- =>                     , gt: children            
+(epoch: 1, iters: 17200, time: 0.010, data: 0.000) G: 0.313 D: 0.037 Dreal: 0.000 Dfake: 0.037 OCR_real: 14.382 OCR_fake: 5.829 grad_fake_OCR: 0.074 grad_fake_adv: 0.074 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------------------- =>                     , gt: studied             
+------------------------------------------------- =>                     , gt: best                
+------------------------------------------------- =>                     , gt: moved               
+(epoch: 1, iters: 17600, time: 0.011, data: 0.000) G: 1.051 D: 1.158 Dreal: 1.158 Dfake: 0.000 OCR_real: 17.674 OCR_fake: 13.168 grad_fake_OCR: 0.046 grad_fake_adv: 0.047 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+----------------------------------------- =>                     , gt: of                  
+----------------------------------------- =>                     , gt: in                  
+----------------------------------------- =>                     , gt: cited               
+(epoch: 1, iters: 18000, time: 0.019, data: 0.000) G: 2.545 D: 0.159 Dreal: 0.135 Dfake: 0.024 OCR_real: 16.818 OCR_fake: 5.970 grad_fake_OCR: 0.071 grad_fake_adv: 0.071 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------------------- =>                     , gt: cut                 
+------------------------------------------------- =>                     , gt: a                   
+------------------------------------------------- =>                     , gt: like                
+(epoch: 1, iters: 18400, time: 0.011, data: 0.000) G: 1.984 D: 0.861 Dreal: 0.819 Dfake: 0.042 OCR_real: 18.900 OCR_fake: 4.273 grad_fake_OCR: 0.079 grad_fake_adv: 0.079 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--------------------------------- =>                     , gt: using               
+--------------------------------- =>                     , gt: one                 
+--------------------------------- =>                     , gt: Naples              
+(epoch: 1, iters: 18800, time: 0.010, data: 0.000) G: 4.770 D: 0.038 Dreal: 0.006 Dfake: 0.032 OCR_real: 14.189 OCR_fake: 5.821 grad_fake_OCR: 0.033 grad_fake_adv: 0.034 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+----------------------------------------- =>                     , gt: well                
+----------------------------------------- =>                     , gt: two                 
+----------------------------------------- =>                     , gt: England             
+(epoch: 1, iters: 19200, time: 0.010, data: 0.000) G: 4.050 D: 1.471 Dreal: 0.050 Dfake: 1.421 OCR_real: 17.736 OCR_fake: 10.489 grad_fake_OCR: 0.050 grad_fake_adv: 0.051 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--------------------------------------------- =>                     , gt: lieutenants         
+--------------------------------------------- =>                     , gt: diplomatist         
+--------------------------------------------- =>                     , gt: Gaulle              
+(epoch: 1, iters: 19600, time: 0.020, data: 0.000) G: 3.689 D: 0.139 Dreal: 0.139 Dfake: 0.000 OCR_real: 15.771 OCR_fake: 19.692 grad_fake_OCR: 0.044 grad_fake_adv: 0.045 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------------------- =>                     , gt: of                  
+------------------------------------------------- =>                     , gt: seedling            
+------------------------------------------------- =>                     , gt: square              
+(epoch: 1, iters: 20000, time: 0.011, data: 0.000) G: 1.601 D: 0.297 Dreal: 0.297 Dfake: 0.000 OCR_real: 17.666 OCR_fake: 9.284 grad_fake_OCR: 0.048 grad_fake_adv: 0.048 
+saving the latest model (epoch 1, total_iters 20000)
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------- =>                     , gt: aspect              
+------------------------- =>                     , gt: a                   
+------------------------- =>                     , gt: that                
+(epoch: 1, iters: 20400, time: 0.009, data: 0.000) G: -0.681 D: 0.654 Dreal: 0.000 Dfake: 0.654 OCR_real: 11.457 OCR_fake: 6.847 grad_fake_OCR: 0.162 grad_fake_adv: 0.163 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------- =>                     , gt: House               
+------------------------------------- =>                     , gt: to                  
+------------------------------------- =>                     , gt: Thursday            
+(epoch: 1, iters: 20800, time: 0.010, data: 0.000) G: 3.524 D: 0.010 Dreal: 0.000 Dfake: 0.010 OCR_real: 14.139 OCR_fake: 24.404 grad_fake_OCR: 0.064 grad_fake_adv: 0.064 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------------------- =>                     , gt: sailing             
+------------------------------------------------- =>                     , gt: can                 
+------------------------------------------------- =>                     , gt: time                
+(epoch: 1, iters: 21200, time: 0.020, data: 0.000) G: 6.868 D: 2.372 Dreal: 2.372 Dfake: 0.000 OCR_real: 12.647 OCR_fake: 16.111 grad_fake_OCR: 0.055 grad_fake_adv: 0.056 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+----------------------------- =>                     , gt: every-              
+----------------------------- =>                     , gt: and                 
+----------------------------- =>                     , gt: this                
+(epoch: 1, iters: 21600, time: 0.009, data: 0.000) G: 1.159 D: 0.035 Dreal: 0.035 Dfake: 0.000 OCR_real: 11.771 OCR_fake: 15.367 grad_fake_OCR: 0.027 grad_fake_adv: 0.027 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------- =>                     , gt: been                
+------------------------------------- =>                     , gt: year                
+------------------------------------- =>                     , gt: of                  
+(epoch: 1, iters: 22000, time: 0.010, data: 0.000) G: 1.307 D: 0.682 Dreal: 0.000 Dfake: 0.682 OCR_real: 11.369 OCR_fake: 12.506 grad_fake_OCR: 0.074 grad_fake_adv: 0.074 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--------------------------------- =>                     , gt: but                 
+--------------------------------- =>                     , gt: for                 
+--------------------------------- =>                     , gt: suggests            
+(epoch: 1, iters: 22400, time: 0.010, data: 0.000) G: -0.168 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 12.916 OCR_fake: 7.931 grad_fake_OCR: 0.079 grad_fake_adv: 0.079 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------------------- =>                     , gt: Mr.                 
+------------------------------------------------- =>                     , gt: play-grounds        
+------------------------------------------------- =>                     , gt: of                  
+(epoch: 1, iters: 22800, time: 0.019, data: 0.000) G: -0.064 D: 0.181 Dreal: 0.000 Dfake: 0.181 OCR_real: 14.635 OCR_fake: 10.000 grad_fake_OCR: 0.117 grad_fake_adv: 0.117 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--------------------------------- =>                     , gt: high                
+--------------------------------- =>                     , gt: the                 
+--------------------------------- =>                     , gt: change              
+(epoch: 1, iters: 23200, time: 0.010, data: 0.000) G: 2.468 D: 0.017 Dreal: 0.000 Dfake: 0.017 OCR_real: 13.318 OCR_fake: 10.211 grad_fake_OCR: 0.070 grad_fake_adv: 0.070 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------------------- =>                     , gt: to                  
+------------------------------------------------- =>                     , gt: whom                
+------------------------------------------------- =>                     , gt: ended               
+(epoch: 1, iters: 23600, time: 0.012, data: 0.000) G: 3.216 D: 0.823 Dreal: 0.823 Dfake: 0.000 OCR_real: 17.263 OCR_fake: 11.039 grad_fake_OCR: 0.022 grad_fake_adv: 0.022 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------------------- =>                     , gt: 20                  
+------------------------------------------------- =>                     , gt: services            
+------------------------------------------------- =>                     , gt: be                  
+(epoch: 1, iters: 24000, time: 0.011, data: 0.000) G: 0.577 D: 0.545 Dreal: 0.000 Dfake: 0.545 OCR_real: 15.884 OCR_fake: 10.154 grad_fake_OCR: 0.054 grad_fake_adv: 0.054 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+----------------------------------------- =>                     , gt: thorough            
+----------------------------------------- =>                     , gt: our                 
+----------------------------------------- =>                     , gt: of                  
+(epoch: 1, iters: 24400, time: 0.019, data: 0.000) G: 2.868 D: 0.071 Dreal: 0.000 Dfake: 0.071 OCR_real: 15.123 OCR_fake: 13.530 grad_fake_OCR: 0.054 grad_fake_adv: 0.055 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------- =>                     , gt: The                 
+------------------------------------- =>                     , gt: are                 
+------------------------------------- =>                     , gt: friends             
+(epoch: 1, iters: 24800, time: 0.010, data: 0.000) G: 4.352 D: 0.015 Dreal: 0.015 Dfake: 0.000 OCR_real: 13.165 OCR_fake: 18.464 grad_fake_OCR: 0.076 grad_fake_adv: 0.076 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------- =>                     , gt: of                  
+------------------------------------- =>                     , gt: in                  
+------------------------------------- =>                     , gt: going               
+(epoch: 1, iters: 25200, time: 0.010, data: 0.000) G: -0.202 D: 0.635 Dreal: 0.000 Dfake: 0.635 OCR_real: 11.821 OCR_fake: 4.378 grad_fake_OCR: 0.142 grad_fake_adv: 0.142 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------- =>                     , gt: are                 
+------------------------------------- =>                     , gt: the                 
+------------------------------------- =>                     , gt: hardboard           
+(epoch: 1, iters: 25600, time: 0.010, data: 0.000) G: 2.422 D: 0.160 Dreal: 0.000 Dfake: 0.160 OCR_real: 16.271 OCR_fake: 11.056 grad_fake_OCR: 0.061 grad_fake_adv: 0.062 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--------------------------------------------- =>                     , gt: the                 
+--------------------------------------------- =>                     , gt: contemplate         
+--------------------------------------------- =>                     , gt: year                
+(epoch: 1, iters: 26000, time: 0.019, data: 0.000) G: 2.139 D: 0.040 Dreal: 0.040 Dfake: 0.000 OCR_real: 13.454 OCR_fake: 8.581 grad_fake_OCR: 0.107 grad_fake_adv: 0.109 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--------------------------------- =>                     , gt: Germany             
+--------------------------------- =>                     , gt: and                 
+--------------------------------- =>                     , gt: wrote               
+(epoch: 1, iters: 26400, time: 0.011, data: 0.000) G: 1.789 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 11.373 OCR_fake: 10.976 grad_fake_OCR: 0.079 grad_fake_adv: 0.080 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------- =>                     , gt: &                   
+------------------------------------- =>                     , gt: real                
+------------------------------------- =>                     , gt: the                 
+(epoch: 1, iters: 26800, time: 0.011, data: 0.000) G: 1.637 D: 0.520 Dreal: 0.000 Dfake: 0.520 OCR_real: 12.693 OCR_fake: 9.601 grad_fake_OCR: 0.073 grad_fake_adv: 0.073 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------- =>                     , gt: Mr.                 
+------------------------------------- =>                     , gt: and                 
+------------------------------------- =>                     , gt: Iain                
+(epoch: 1, iters: 27200, time: 0.010, data: 0.000) G: 1.914 D: 0.016 Dreal: 0.016 Dfake: 0.000 OCR_real: 15.478 OCR_fake: 5.739 grad_fake_OCR: 0.086 grad_fake_adv: 0.086 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+----------------------------------------- =>                     , gt: offer               
+----------------------------------------- =>                     , gt: secretary           
+----------------------------------------- =>                     , gt: the                 
+(epoch: 1, iters: 27600, time: 0.019, data: 0.000) G: 3.358 D: 0.035 Dreal: 0.030 Dfake: 0.005 OCR_real: 12.787 OCR_fake: 3.142 grad_fake_OCR: 0.054 grad_fake_adv: 0.054 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+----------------------------------------- =>                     , gt: increasing          
+----------------------------------------- =>                     , gt: a                   
+----------------------------------------- =>                     , gt: had                 
+(epoch: 1, iters: 28000, time: 0.010, data: 0.000) G: 3.882 D: 0.134 Dreal: 0.134 Dfake: 0.000 OCR_real: 13.668 OCR_fake: 9.511 grad_fake_OCR: 0.072 grad_fake_adv: 0.072 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--------------------------------------------- =>                     , gt: me                  
+--------------------------------------------- =>                     , gt: ...                 
+--------------------------------------------- =>                     , gt: Honey               
+(epoch: 1, iters: 28400, time: 0.011, data: 0.000) G: 3.150 D: 0.158 Dreal: 0.158 Dfake: 0.000 OCR_real: 10.943 OCR_fake: 3.664 grad_fake_OCR: 0.085 grad_fake_adv: 0.085 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+----------------------------------------- =>                     , gt: Chambre             
+----------------------------------------- =>                     , gt: knowledge           
+----------------------------------------- =>                     , gt: despite             
+(epoch: 1, iters: 28800, time: 0.011, data: 0.000) G: 5.285 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 15.760 OCR_fake: 10.608 grad_fake_OCR: 0.045 grad_fake_adv: 0.045 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------------------- =>                     , gt: numerous            
+------------i-----------------------------iii---- => ii                  , gt: Lichtenstein        
+------------------------------------------------- =>                     , gt: to                  
+(epoch: 1, iters: 29200, time: 0.020, data: 0.000) G: 3.077 D: 0.006 Dreal: 0.000 Dfake: 0.006 OCR_real: 13.744 OCR_fake: 4.255 grad_fake_OCR: 0.086 grad_fake_adv: 0.086 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------- =>                     , gt: someone             
+------------------------------------- =>                     , gt: posed               
+------------------------------------- =>                     , gt: might               
+(epoch: 1, iters: 29600, time: 0.011, data: 0.000) G: 6.764 D: 0.025 Dreal: 0.001 Dfake: 0.024 OCR_real: 15.662 OCR_fake: 11.775 grad_fake_OCR: 0.096 grad_fake_adv: 0.105 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------------------- =>                     , gt: which               
+------------------------------------------------- =>                     , gt: ripping             
+------------------------------------------------- =>                     , gt: form                
+(epoch: 1, iters: 30000, time: 0.011, data: 0.000) G: 3.683 D: 0.087 Dreal: 0.087 Dfake: 0.000 OCR_real: 16.951 OCR_fake: 8.988 grad_fake_OCR: 0.134 grad_fake_adv: 0.134 
+saving the latest model (epoch 1, total_iters 30000)
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------- =>                     , gt: his                 
+------------------------------------- =>                     , gt: the                 
+------------------------------------- =>                     , gt: at                  
+(epoch: 1, iters: 30400, time: 0.010, data: 0.000) G: 3.530 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 11.249 OCR_fake: 3.879 grad_fake_OCR: 0.107 grad_fake_adv: 0.107 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--------------------------------- =>                     , gt: Towards             
+--------------------------------- =>                     , gt: with                
+---------ii---------------------- => i                   , gt: fire                
+(epoch: 1, iters: 30800, time: 0.019, data: 0.000) G: 3.368 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 13.496 OCR_fake: 4.861 grad_fake_OCR: 0.072 grad_fake_adv: 0.072 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--------------------------------------------- =>                     , gt: Starfighter         
+--------------------------------------------- =>                     , gt: his                 
+--------------------------------------------- =>                     , gt: the                 
+(epoch: 1, iters: 31200, time: 0.011, data: 0.000) G: 2.472 D: 0.094 Dreal: 0.017 Dfake: 0.076 OCR_real: 18.118 OCR_fake: 6.112 grad_fake_OCR: 0.089 grad_fake_adv: 0.089 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------- =>                     , gt: for                 
+------------------------------------- =>                     , gt: Frankie             
+------------------------------------- =>                     , gt: reassured           
+(epoch: 1, iters: 31600, time: 0.010, data: 0.000) G: 4.486 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 13.995 OCR_fake: 5.126 grad_fake_OCR: 0.096 grad_fake_adv: 0.096 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------------------- =>                     , gt: It                  
+------------------------------------------------- =>                     , gt: Commonwealth        
+------------------------------------------------- =>                     , gt: and                 
+(epoch: 1, iters: 32000, time: 0.011, data: 0.000) G: 2.804 D: 0.311 Dreal: 0.000 Dfake: 0.311 OCR_real: 12.462 OCR_fake: 6.218 grad_fake_OCR: 0.093 grad_fake_adv: 0.093 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--------------------------------------------- =>                     , gt: how                 
+--------------------------------------------- =>                     , gt: in                  
+--------------------------------------------- =>                     , gt: more                
+(epoch: 1, iters: 32400, time: 0.019, data: 0.000) G: 4.483 D: 0.064 Dreal: 0.064 Dfake: 0.000 OCR_real: 10.844 OCR_fake: 4.810 grad_fake_OCR: 0.141 grad_fake_adv: 0.141 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--------------------------------- =>                     , gt: made                
+--------------------------------- =>                     , gt: near                
+--------------------------------- =>                     , gt: 36                  
+(epoch: 1, iters: 32800, time: 0.010, data: 0.000) G: 3.054 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 12.973 OCR_fake: 5.668 grad_fake_OCR: 0.171 grad_fake_adv: 0.171 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+----------------------------------------- =>                     , gt: growth              
+----------------------------------------- =>                     , gt: As                  
+----------------------------------------- =>                     , gt: few                 
+(epoch: 1, iters: 33200, time: 0.011, data: 0.000) G: 1.729 D: 0.267 Dreal: 0.047 Dfake: 0.221 OCR_real: 11.732 OCR_fake: 3.669 grad_fake_OCR: 0.046 grad_fake_adv: 0.046 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--t------------------------------ => t                   , gt: that                
+--------------------------------- =>                     , gt: in                  
+--------------------------------- =>                     , gt: any                 
+(epoch: 1, iters: 33600, time: 0.010, data: 0.000) G: 2.053 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 8.829 OCR_fake: 4.741 grad_fake_OCR: 0.074 grad_fake_adv: 0.075 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+----------------------------- =>                     , gt: give                
+----------------------------- =>                     , gt: hook                
+----------------------------- =>                     , gt: of                  
+(epoch: 1, iters: 34000, time: 0.018, data: 0.000) G: 4.920 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 11.471 OCR_fake: 5.732 grad_fake_OCR: 0.082 grad_fake_adv: 0.083 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--t------------------------------ => t                   , gt: that                
+--------------------------------- =>                     , gt: Each                
+--------------------------------- =>                     , gt: planed              
+(epoch: 1, iters: 34400, time: 0.010, data: 0.000) G: 4.607 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 13.580 OCR_fake: 7.025 grad_fake_OCR: 0.141 grad_fake_adv: 0.141 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------- =>                     , gt: applied             
+------------------------------------- =>                     , gt: R.                  
+------------------------------------- =>                     , gt: and                 
+(epoch: 1, iters: 34800, time: 0.010, data: 0.000) G: 3.594 D: 0.438 Dreal: 0.000 Dfake: 0.438 OCR_real: 9.171 OCR_fake: 4.827 grad_fake_OCR: 0.122 grad_fake_adv: 0.123 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--------------------------------------------- =>                     , gt: it                  
+--------------------------------------------- =>                     , gt: her                 
+--------------------------------------------- =>                     , gt: with                
+(epoch: 1, iters: 35200, time: 0.011, data: 0.000) G: 5.683 D: 0.596 Dreal: 0.596 Dfake: 0.000 OCR_real: 15.385 OCR_fake: 4.265 grad_fake_OCR: 0.116 grad_fake_adv: 0.116 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------t---ii------- => ti                  , gt: d'Initiative        
+------------------------------------------------- =>                     , gt: had                 
+------------------------------------------------- =>                     , gt: as                  
+(epoch: 1, iters: 35600, time: 0.019, data: 0.000) G: 1.423 D: 0.081 Dreal: 0.081 Dfake: 0.000 OCR_real: 10.777 OCR_fake: 2.829 grad_fake_OCR: 0.115 grad_fake_adv: 0.115 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+----------------------------------------------------- =>                     , gt: up                  
+----------------------------------------------------- =>                     , gt: does                
+----------------------------------------------------- =>                     , gt: to                  
+(epoch: 1, iters: 36000, time: 0.012, data: 0.000) G: 0.253 D: 0.032 Dreal: 0.023 Dfake: 0.009 OCR_real: 13.592 OCR_fake: 3.213 grad_fake_OCR: 0.173 grad_fake_adv: 0.173 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+---------------ii---------------- => i                   , gt: various             
+----------ee--------------------- => e                   , gt: the                 
+--------------------------------- =>                     , gt: every               
+(epoch: 1, iters: 36400, time: 0.010, data: 0.000) G: 2.510 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 10.721 OCR_fake: 4.140 grad_fake_OCR: 0.116 grad_fake_adv: 0.116 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------- =>                     , gt: we                  
+------------------------- =>                     , gt: would               
+------------------------- =>                     , gt: of                  
+(epoch: 1, iters: 36800, time: 0.009, data: 0.000) G: 2.605 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 8.552 OCR_fake: 3.136 grad_fake_OCR: 0.165 grad_fake_adv: 0.165 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+----------------------------------------- =>                     , gt: of                  
+--t-------------------------------------- => t                   , gt: to                  
+--p-------------------------------------- => p                   , gt: plans               
+(epoch: 1, iters: 37200, time: 0.019, data: 0.000) G: 5.912 D: 0.263 Dreal: 0.263 Dfake: 0.000 OCR_real: 6.912 OCR_fake: 3.407 grad_fake_OCR: 0.096 grad_fake_adv: 0.096 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--t-------------------------------------- => t                   , gt: Kennedy's           
+--a-------------------------------------- => a                   , gt: a                   
+--p-------------------------------------- => p                   , gt: players             
+(epoch: 1, iters: 37600, time: 0.010, data: 0.000) G: 2.779 D: 0.670 Dreal: 0.000 Dfake: 0.670 OCR_real: 8.214 OCR_fake: 4.404 grad_fake_OCR: 0.060 grad_fake_adv: 0.061 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--t---------------------------------- => t                   , gt: to                  
+----------d-------------------------- => d                   , gt: and                 
+------------------------------------- =>                     , gt: reality             
+(epoch: 1, iters: 38000, time: 0.010, data: 0.000) G: 2.485 D: 0.348 Dreal: 0.348 Dfake: 0.000 OCR_real: 7.491 OCR_fake: 5.678 grad_fake_OCR: 0.121 grad_fake_adv: 0.122 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------- =>                     , gt: mahogany            
+------------------------------------- =>                     , gt: the                 
+------------------------------------- =>                     , gt: not                 
+(epoch: 1, iters: 38400, time: 0.010, data: 0.000) G: 4.378 D: 0.164 Dreal: 0.164 Dfake: 0.000 OCR_real: 8.139 OCR_fake: 5.257 grad_fake_OCR: 0.106 grad_fake_adv: 0.106 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+------------------------------------- =>                     , gt: panel               
+------------------------------------- =>                     , gt: to                  
+--t---------------------------------- => t                   , gt: to                  
+(epoch: 1, iters: 38800, time: 0.018, data: 0.000) G: 3.407 D: 0.042 Dreal: 0.000 Dfake: 0.042 OCR_real: 8.331 OCR_fake: 2.681 grad_fake_OCR: 0.078 grad_fake_adv: 0.078 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--t---i-------i-----tt---e--------------- => tiite               , gt: Minister            
+--a---t---------------------------------- => at                  , gt: at                  
+--t-------------------------------------- => t                   , gt: Master              
+(epoch: 1, iters: 39200, time: 0.011, data: 0.000) G: 4.010 D: 0.053 Dreal: 0.000 Dfake: 0.053 OCR_real: 11.470 OCR_fake: 4.348 grad_fake_OCR: 0.162 grad_fake_adv: 0.163 
+######## fake images OCR prediction ########
+--a-------------------------- => a                   , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--o------------t------------ee------------------- => ote                 , gt: obstacle            
+------ii---------------------ii------------------ => ii                  , gt: situation           
+--w----------ee---------------------------------- => we                  , gt: make                
+(epoch: 1, iters: 39600, time: 0.011, data: 0.000) G: 4.593 D: 0.330 Dreal: 0.330 Dfake: 0.000 OCR_real: 11.883 OCR_fake: 4.098 grad_fake_OCR: 0.119 grad_fake_adv: 0.120 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+-----e----------------------- => e                   , gt: babis               
+######## real images OCR prediction ########
+--a------------------------------------------------------ => a                   , gt: under               
+--------------t---hh---------------iin--------------a---- => thina               , gt: brother-in-law      
+--p-------------e---------------------------------------- => pe                  , gt: proved              
+(epoch: 1, iters: 40000, time: 0.012, data: 0.000) G: 6.447 D: 0.094 Dreal: 0.049 Dfake: 0.045 OCR_real: 15.600 OCR_fake: 4.019 grad_fake_OCR: 0.095 grad_fake_adv: 0.095 
+saving the latest model (epoch 1, total_iters 40000)
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+-------------i--ss---t----ss------------- => ists                , gt: logists             
+--tt--h-----------e---------------------- => the                 , gt: there               
+--a-------------------------------------- => a                   , gt: an                  
+(epoch: 1, iters: 40400, time: 0.020, data: 0.000) G: 4.319 D: 0.058 Dreal: 0.038 Dfake: 0.020 OCR_real: 9.744 OCR_fake: 4.210 grad_fake_OCR: 0.124 grad_fake_adv: 0.124 
+######## fake images OCR prediction ########
+--a-------------------------- => a                   , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--a-------------------------------------------------- => a                   , gt: a                   
+------------------e---------------------------------- => e                   , gt: concerned           
+--ee---------a--------------------------------------- => ea                  , gt: expansion           
+(epoch: 1, iters: 40800, time: 0.012, data: 0.000) G: 2.617 D: 0.647 Dreal: 0.315 Dfake: 0.332 OCR_real: 14.014 OCR_fake: 2.405 grad_fake_OCR: 0.065 grad_fake_adv: 0.066 
+######## fake images OCR prediction ########
+--a-------------------------- => a                   , gt: citolas             
+--a-------------------------- => a                   , gt: babis               
+######## real images OCR prediction ########
+--a-------d------------------------------ => ad                  , gt: and                 
+--o-------------------------------------- => o                   , gt: of                  
+--a--------d----------------------------- => ad                  , gt: and                 
+(epoch: 1, iters: 41200, time: 0.011, data: 0.000) G: 0.907 D: 0.094 Dreal: 0.000 Dfake: 0.094 OCR_real: 9.541 OCR_fake: 4.433 grad_fake_OCR: 0.220 grad_fake_adv: 0.220 
+######## fake images OCR prediction ########
+--a-------------------------- => a                   , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--------------t-------------- => t                   , gt: lost                
+--t---o---------------------- => to                  , gt: told                
+--m-------dd----------------- => md                  , gt: mad                 
+(epoch: 1, iters: 41600, time: 0.010, data: 0.000) G: 3.505 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 6.957 OCR_fake: 3.420 grad_fake_OCR: 0.167 grad_fake_adv: 0.167 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--a---------------------------------- => a                   , gt: a                   
+--c--h------------------------------- => ch                  , gt: church              
+--e---------------------------------- => e                   , gt: on                  
+(epoch: 1, iters: 42000, time: 0.019, data: 0.000) G: 3.621 D: 0.047 Dreal: 0.046 Dfake: 0.001 OCR_real: 8.558 OCR_fake: 2.389 grad_fake_OCR: 0.066 grad_fake_adv: 0.066 
+######## fake images OCR prediction ########
+----------------------------- =>                     , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--h---------------y------------------ => hy                  , gt: being               
+--t---------------------------------- => t                   , gt: bold                
+--w----h----------------------------- => wh                  , gt: who                 
+(epoch: 1, iters: 42400, time: 0.011, data: 0.000) G: 3.414 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 6.632 OCR_fake: 3.376 grad_fake_OCR: 0.125 grad_fake_adv: 0.125 
+######## fake images OCR prediction ########
+--w-------------------------- => w                   , gt: citolas             
+--w-------------------------- => w                   , gt: babis               
+######## real images OCR prediction ########
+-----------------i------------------------------- => i                   , gt: April               
+-------aa---------ii----------------------------- => ai                  , gt: reading             
+--s--t--oo--------------------------------------- => sto                 , gt: Stoke               
+(epoch: 1, iters: 42800, time: 0.012, data: 0.000) G: 3.876 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 9.903 OCR_fake: 2.217 grad_fake_OCR: 0.107 grad_fake_adv: 0.107 
+######## fake images OCR prediction ########
+--w--ii---------------------- => wi                  , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--t---a---t------e---dd------------------ => tated               , gt: talked              
+--n---o---tt----------------------------- => not                 , gt: not                 
+------------i---------------------------- => i                   , gt: Prime               
+(epoch: 1, iters: 43200, time: 0.011, data: 0.000) G: 2.103 D: 0.642 Dreal: 0.000 Dfake: 0.642 OCR_real: 6.878 OCR_fake: 2.528 grad_fake_OCR: 0.181 grad_fake_adv: 0.181 
+######## fake images OCR prediction ########
+--w--ii---------------------- => wi                  , gt: citolas             
+--w-------------------------- => w                   , gt: babis               
+######## real images OCR prediction ########
+--w---ii--t------------------------------ => wit                 , gt: with                
+--a-------------------------------------- => a                   , gt: as                  
+--t-------------d------------------------ => td                  , gt: heard               
+(epoch: 1, iters: 43600, time: 0.020, data: 0.000) G: 4.573 D: 0.111 Dreal: 0.000 Dfake: 0.111 OCR_real: 8.975 OCR_fake: 3.936 grad_fake_OCR: 0.135 grad_fake_adv: 0.135 
+######## fake images OCR prediction ########
+--w--ii---------------------- => wi                  , gt: citolas             
+--a-------------------------- => a                   , gt: babis               
+######## real images OCR prediction ########
+--t--h---ee------------------------------ => the                 , gt: the                 
+---------r--ee--------------------------- => re                  , gt: fire                
+--------------ee----a---s-iii-n---------- => easin               , gt: unceasing           
+(epoch: 1, iters: 44000, time: 0.011, data: 0.000) G: 4.119 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 6.652 OCR_fake: 4.551 grad_fake_OCR: 0.180 grad_fake_adv: 0.180 
+######## fake images OCR prediction ########
+--w--ii---------------------- => wi                  , gt: citolas             
+--w-------------------------- => w                   , gt: babis               
+######## real images OCR prediction ########
+----------------ii----------------------- => i                   , gt: saying              
+-------hh---iii-t------l------nn--------- => hitln               , gt: switching           
+---s--t---------------------------------- => st                  , gt: at                  
+(epoch: 1, iters: 44400, time: 0.011, data: 0.000) G: 3.627 D: 0.006 Dreal: 0.000 Dfake: 0.006 OCR_real: 8.066 OCR_fake: 3.177 grad_fake_OCR: 0.154 grad_fake_adv: 0.154 
+######## fake images OCR prediction ########
+--a---i---t------h----------- => aith                , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--t-------ee------------------------- => te                  , gt: the                 
+--m-----a---l--e--------------------- => male                , gt: make                
+--t---h----a---t--------------------- => that                , gt: that                
+(epoch: 1, iters: 44800, time: 0.011, data: 0.000) G: 3.481 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 4.419 OCR_fake: 3.573 grad_fake_OCR: 0.193 grad_fake_adv: 0.193 
+######## fake images OCR prediction ########
+--a--ii-------o--h----------- => aioh                , gt: citolas             
+--w-------------------------- => w                   , gt: babis               
+######## real images OCR prediction ########
+--c--l-------ee---------------------------------- => cle                 , gt: cure                
+---------------------e---a-----h----------------- => eah                 , gt: 20-month-old        
+----d--e----------------------------------------- => de                  , gt: he                  
+(epoch: 1, iters: 45200, time: 0.020, data: 0.000) G: 3.682 D: 0.331 Dreal: 0.231 Dfake: 0.100 OCR_real: 8.835 OCR_fake: 1.989 grad_fake_OCR: 0.087 grad_fake_adv: 0.087 
+######## fake images OCR prediction ########
+------i----------l----------- => il                  , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+---g---ee--n---t----l---- => gentl               , gt: gentle              
+--h---o---d-------------- => hod                 , gt: had                 
+------------------------- =>                     , gt: of                  
+(epoch: 1, iters: 45600, time: 0.009, data: 0.000) G: 3.073 D: 0.037 Dreal: 0.000 Dfake: 0.037 OCR_real: 5.763 OCR_fake: 2.646 grad_fake_OCR: 0.117 grad_fake_adv: 0.117 
+######## fake images OCR prediction ########
+--h-------i------------------ => hi                  , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--a---------------------------------- => a                   , gt: a                   
+--i------c----r--e---a---s---e---d--- => icreased            , gt: increased           
+--ii--nn----------------------------- => in                  , gt: in                  
+(epoch: 1, iters: 46000, time: 0.011, data: 0.000) G: 4.154 D: 0.047 Dreal: 0.047 Dfake: 0.000 OCR_real: 5.111 OCR_fake: 2.205 grad_fake_OCR: 0.082 grad_fake_adv: 0.083 
+######## fake images OCR prediction ########
+--h-------------------------- => h                   , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--------pp---l----yy----------------------------- => ply                 , gt: reply               
+-----oo---rr------------------------------------- => or                  , gt: For                 
+--p----oo---c--ll--o------n---aa---iii--e-----n-- => poclonaien          , gt: proclamation        
+(epoch: 1, iters: 46400, time: 0.012, data: 0.000) G: 2.229 D: 1.139 Dreal: 1.139 Dfake: 0.000 OCR_real: 6.057 OCR_fake: 2.430 grad_fake_OCR: 0.175 grad_fake_adv: 0.176 
+######## fake images OCR prediction ########
+----------e------l----------- => el                  , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--o-------------------------------------- => o                   , gt: of                  
+--r---e---ee----------------------------- => ree                 , gt: see                 
+--a-------s---o-------------------------- => aso                 , gt: also                
+(epoch: 1, iters: 46800, time: 0.019, data: 0.000) G: 1.928 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 1.525 OCR_fake: 1.730 grad_fake_OCR: 0.212 grad_fake_adv: 0.212 
+######## fake images OCR prediction ########
+-----ii---t---o-------------- => ito                 , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--t---e------------------------------ => te                  , gt: so                  
+-ii---------------------------------- => i                   , gt: into                
+--p-----a-----i-e-----y-------------- => paiey               , gt: policy              
+(epoch: 1, iters: 47200, time: 0.011, data: 0.000) G: 3.059 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 5.499 OCR_fake: 2.163 grad_fake_OCR: 0.128 grad_fake_adv: 0.128 
+End of epoch 1 / 200 	 Time Taken: 375 sec
+learning rate = 0.0002000
+######## fake images OCR prediction ########
+-----ii---e---o--ll---------- => ieol                , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--e------------------------------------------ => e                   , gt: eye                 
+--a------------------------------------------ => a                   , gt: a                   
+--h----e--rr--------------------------------- => her                 , gt: her                 
+(epoch: 2, iters: 272, time: 0.020, data: 0.001) G: 1.863 D: 0.316 Dreal: 0.000 Dfake: 0.316 OCR_real: 5.979 OCR_fake: 1.602 grad_fake_OCR: 0.104 grad_fake_adv: 0.104 
+######## fake images OCR prediction ########
+--w--ii---t---o--ll---------- => witol               , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--t---o------------------------------ => to                  , gt: to                  
+--b----g--------o------------e---d--- => bgoed               , gt: boycotted           
+--a------d--------------------------- => ad                  , gt: and                 
+(epoch: 2, iters: 672, time: 0.011, data: 0.000) G: 2.734 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 9.663 OCR_fake: 2.233 grad_fake_OCR: 0.154 grad_fake_adv: 0.154 
+######## fake images OCR prediction ########
+--w--ii---t------ll---------- => witl                , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--w---ee---a-----ii--n----gg--------- => weaing              , gt: wearing             
+--a---------------------------------- => a                   , gt: a                   
+--i---------------------------------- => i                   , gt: in                  
+(epoch: 2, iters: 1072, time: 0.010, data: 0.000) G: -4.343 D: 2.935 Dreal: 0.000 Dfake: 2.935 OCR_real: 3.494 OCR_fake: 1.847 grad_fake_OCR: 0.176 grad_fake_adv: 0.182 
+######## fake images OCR prediction ########
+--w--ii---e---o--ll------s--- => wieols              , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--s---t-o---------------------------- => sto                 , gt: story               
+--i---------------------------------- => i                   , gt: in                  
+--r-e---t---------------e-----d------ => reted               , gt: returned            
+(epoch: 2, iters: 1472, time: 0.011, data: 0.000) G: 2.717 D: 0.159 Dreal: 0.159 Dfake: 0.000 OCR_real: 10.435 OCR_fake: 0.880 grad_fake_OCR: 0.032 grad_fake_adv: 0.032 
+######## fake images OCR prediction ########
+-----ii---t--oo--ll--a------- => itola               , gt: citolas             
+-----a----------------------- => a                   , gt: babis               
+######## real images OCR prediction ########
+--a---t---------------------------------- => at                  , gt: at                  
+--s-----oo--rr--------------------------- => sor                 , gt: story               
+--------------e-------iii-----s---------- => eis                 , gt: tapering            
+(epoch: 2, iters: 1872, time: 0.020, data: 0.000) G: 3.190 D: 0.213 Dreal: 0.000 Dfake: 0.213 OCR_real: 8.280 OCR_fake: 1.557 grad_fake_OCR: 0.103 grad_fake_adv: 0.103 
+######## fake images OCR prediction ########
+-----ii---e--o---ll--a---s--- => ieolas              , gt: citolas             
+----------------------------- =>                     , gt: babis               
+######## real images OCR prediction ########
+--h-------ii--l-ee--dd--------------- => hiled               , gt: United              
+---------aa--rr---------------------- => ar                  , gt: year                
+-----------pp---e---o-----a---n----t- => peoant              , gt: expectant           
+(epoch: 2, iters: 2272, time: 0.011, data: 0.000) G: 6.030 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 5.974 OCR_fake: 1.701 grad_fake_OCR: 0.099 grad_fake_adv: 0.099 
+######## fake images OCR prediction ########
+-----ii---e--oo--ll--a---s--- => ieolas              , gt: citolas             
+-----e----------------------- => e                   , gt: babis               
+######## real images OCR prediction ########
+---t---o----------------------------------------- => to                  , gt: to                  
+--tt--hh---e------------------------------------- => the                 , gt: the                 
+--t---------------------------------------------- => t                   , gt: we                  
+(epoch: 2, iters: 2672, time: 0.011, data: 0.000) G: 3.214 D: 0.070 Dreal: 0.019 Dfake: 0.051 OCR_real: 3.835 OCR_fake: 1.883 grad_fake_OCR: 0.102 grad_fake_adv: 0.102 
+saving the latest model (epoch 2, total_iters 50000)
+######## fake images OCR prediction ########
+-----ii---t--oo--ll--a---s--- => itolas              , gt: citolas             
+--s--a----------------------- => sa                  , gt: babis               
+######## real images OCR prediction ########
+--w----ii--t--h-------------------------- => with                , gt: with                
+--i-------------------------------------- => i                   , gt: in                  
+--a-------------------------------------- => a                   , gt: a                   
+(epoch: 2, iters: 3072, time: 0.011, data: 0.000) G: 4.893 D: 0.042 Dreal: 0.042 Dfake: 0.000 OCR_real: 5.629 OCR_fake: 1.175 grad_fake_OCR: 0.091 grad_fake_adv: 0.091 
+######## fake images OCR prediction ########
+-----ii---t--oo--ll--a---r--- => itolar              , gt: citolas             
+-----a----------------------- => a                   , gt: babis               
+######## real images OCR prediction ########
+--t--------ii----ii-nn------------------- => tiin                , gt: failing             
+--f-------------------------------------- => f                   , gt: I                   
+--a---n---a-----u----n--i-nn---g--------- => anauning            , gt: enduring            
+(epoch: 2, iters: 3472, time: 0.019, data: 0.000) G: 2.057 D: 0.429 Dreal: 0.000 Dfake: 0.429 OCR_real: 6.299 OCR_fake: 1.761 grad_fake_OCR: 0.191 grad_fake_adv: 0.191 
+######## fake images OCR prediction ########
+-----ii---t--oo--ll--a---s--- => itolas              , gt: citolas             
+-----a----------------------- => a                   , gt: babis               
+######## real images OCR prediction ########
+--T---h---ee------------------------- => The                 , gt: The                 
+--s--t------n---e-----o-------d------ => stneod              , gt: standards           
+--h----o----------------------------- => ho                  , gt: hot                 
+(epoch: 2, iters: 3872, time: 0.011, data: 0.000) G: 3.510 D: 0.009 Dreal: 0.000 Dfake: 0.009 OCR_real: 8.092 OCR_fake: 1.458 grad_fake_OCR: 0.109 grad_fake_adv: 0.109 
+######## fake images OCR prediction ########
+-----ii--tt--oo--ll--a---s--- => itolas              , gt: citolas             
+-----a----------------------- => a                   , gt: babis               
+######## real images OCR prediction ########
+--i------dd-----a---s---t----y--------------- => idasty              , gt: industry            
+--o-------l---yy----------------------------- => oly                 , gt: only                
+--w---hh---s--------------------------------- => whs                 , gt: who                 
+(epoch: 2, iters: 4272, time: 0.011, data: 0.000) G: 2.451 D: 0.114 Dreal: 0.114 Dfake: 0.000 OCR_real: 7.531 OCR_fake: 2.175 grad_fake_OCR: 0.154 grad_fake_adv: 0.154 
+######## fake images OCR prediction ########
+-----ii---t--o---ll--a---s--- => itolas              , gt: citolas             
+-----a----------------------- => a                   , gt: babis               
+######## real images OCR prediction ########
+--a-------------------------------------------------- => a                   , gt: an                  
+--r---e-------c---c--tt--ii--o----n------------------ => recction            , gt: rejection           
+--s--e----e---s-------n------------------------------ => seesn               , gt: season              
+(epoch: 2, iters: 4672, time: 0.012, data: 0.000) G: 5.319 D: 0.111 Dreal: 0.094 Dfake: 0.017 OCR_real: 8.331 OCR_fake: 1.565 grad_fake_OCR: 0.145 grad_fake_adv: 0.145 
+######## fake images OCR prediction ########
+-----i----t--o---ll--a---s--- => itolas              , gt: citolas             
+-----a----------------------- => a                   , gt: babis               
+######## real images OCR prediction ########
+--t--o--------------------------------------- => to                  , gt: to                  
+--a------------------------------------------ => a                   , gt: in                  
+--h----a---d--------------------------------- => had                 , gt: has                 
+(epoch: 2, iters: 5072, time: 0.020, data: 0.000) G: 4.170 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 6.702 OCR_fake: 1.930 grad_fake_OCR: 0.176 grad_fake_adv: 0.176 
+######## fake images OCR prediction ########
+-----i----t--o----l--a------- => itola               , gt: citolas             
+-----a----------------------- => a                   , gt: babis               
+######## real images OCR prediction ########
+----------iii--e----d-------------------- => ied                 , gt: listed              
+--a---n---d------------------------------ => and                 , gt: and                 
+--t-------------------------------------- => t                   , gt: is                  
+(epoch: 2, iters: 5472, time: 0.011, data: 0.000) G: 3.980 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 5.373 OCR_fake: 1.392 grad_fake_OCR: 0.132 grad_fake_adv: 0.132 
+######## fake images OCR prediction ########
+-----i----t--o---ll--a---s--- => itolas              , gt: citolas             
+-----a----------------------- => a                   , gt: babis               
+######## real images OCR prediction ########
+--t--h--e-------------------------------- => the                 , gt: the                 
+--n----o--t------------------------------ => not                 , gt: not                 
+--T-----a----n----s---------------------- => Tans                , gt: Paris               
+(epoch: 2, iters: 5872, time: 0.011, data: 0.000) G: 4.837 D: 0.039 Dreal: 0.012 Dfake: 0.027 OCR_real: 7.036 OCR_fake: 1.029 grad_fake_OCR: 0.097 grad_fake_adv: 0.099 
+######## fake images OCR prediction ########
+--r--ii---t--o---ll--aa--s--- => ritolas             , gt: citolas             
+--r--a----------------------- => ra                  , gt: babis               
+######## real images OCR prediction ########
+--i---o----g---e----------e---r-------------- => iogeer              , gt: together            
+--o--tt-------------------------------------- => ot                  , gt: of                  
+--w---ii--t---------------------------------- => wit                 , gt: with                
+(epoch: 2, iters: 6272, time: 0.011, data: 0.000) G: 1.604 D: 0.126 Dreal: 0.126 Dfake: 0.000 OCR_real: 7.331 OCR_fake: 1.074 grad_fake_OCR: 0.139 grad_fake_adv: 0.139 
+######## fake images OCR prediction ########
+--a--i----t--oo--ll--a---s--- => aitolas             , gt: citolas             
+--s--a----------------------- => sa                  , gt: babis               
+######## real images OCR prediction ########
+--T-------------------------------------- => T                   , gt: Brown               
+--o--n----------------------------------- => on                  , gt: and                 
+--e------g---h---e----------------------- => eghe                , gt: eight               
+(epoch: 2, iters: 6672, time: 0.020, data: 0.000) G: 3.052 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 11.741 OCR_fake: 3.299 grad_fake_OCR: 0.224 grad_fake_adv: 0.224 
+######## fake images OCR prediction ########
+-----ii---t--oo--ll--a---s--- => itolas              , gt: citolas             
+--s--a----------------------- => sa                  , gt: babis               
+######## real images OCR prediction ########
+-ii-------------------------------------- => i                   , gt: in                  
+--t-------o------------------------------ => to                  , gt: Who                 
+--u---t--u------o---s--t----------------- => utuost              , gt: utmost              
+(epoch: 2, iters: 7072, time: 0.011, data: 0.000) G: 3.805 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 4.671 OCR_fake: 1.133 grad_fake_OCR: 0.127 grad_fake_adv: 0.127 
+######## fake images OCR prediction ########
+-----i----t--oo--ll--a---s--- => itolas              , gt: citolas             
+--a--n----------------------- => an                  , gt: babis               
+######## real images OCR prediction ########
+--t---o-------------------------------------- => to                  , gt: to                  
+--m--------ss--t----------------------------- => mst                 , gt: must                
+--t---o-------------------------------------- => to                  , gt: to                  
+(epoch: 2, iters: 7472, time: 0.011, data: 0.000) G: 2.870 D: 0.123 Dreal: 0.080 Dfake: 0.043 OCR_real: 8.454 OCR_fake: 1.265 grad_fake_OCR: 0.142 grad_fake_adv: 0.142 
+######## fake images OCR prediction ########
+-----ii---t--oo--ll--a---s--- => itolas              , gt: citolas             
+--s--a---s------------------- => sas                 , gt: babis               
+######## real images OCR prediction ########
+--h---e------------------------------ => he                  , gt: he                  
+--g--------n--n---a--r--------------- => gnnar               , gt: Germany             
+--a---n------------------------------ => an                  , gt: on                  
+(epoch: 2, iters: 7872, time: 0.011, data: 0.000) G: 3.681 D: 0.015 Dreal: 0.015 Dfake: 0.000 OCR_real: 5.681 OCR_fake: 1.580 grad_fake_OCR: 0.162 grad_fake_adv: 0.163 
+######## fake images OCR prediction ########
+-----ii---t--oo--ll--a---s--- => itolas              , gt: citolas             
+--s--a---s------------------- => sas                 , gt: babis               
+######## real images OCR prediction ########
+--r----e---hh---t---ii--o----n----s-------------- => rehtions            , gt: relations           
+--h-------------h-------------------------------- => hh                  , gt: lunch               
+-----pp--e---e---c---h--------------------------- => peech               , gt: speech              
+(epoch: 2, iters: 8272, time: 0.020, data: 0.000) G: 5.994 D: 1.433 Dreal: 1.433 Dfake: 0.000 OCR_real: 3.029 OCR_fake: 1.416 grad_fake_OCR: 0.189 grad_fake_adv: 0.189 
+######## fake images OCR prediction ########
+-----ii---t---o--ll--a---s--- => itolas              , gt: citolas             
+--s--a---s------------------- => sas                 , gt: babis               
+######## real images OCR prediction ########
+--a---------------------------------------------- => a                   , gt: I                   
+--t--oo------------------------------------------ => to                  , gt: to                  
+--m--n--i--g------t------------------------------ => mnigt               , gt: might               
+(epoch: 2, iters: 8672, time: 0.012, data: 0.000) G: 3.890 D: 0.033 Dreal: 0.006 Dfake: 0.027 OCR_real: 7.047 OCR_fake: 1.359 grad_fake_OCR: 0.157 grad_fake_adv: 0.157 
+######## fake images OCR prediction ########
+-----ii--tt--oo--ll--a---s--- => itolas              , gt: citolas             
+--s--a---s------------------- => sas                 , gt: babis               
+######## real images OCR prediction ########
+--------n---i----yy---------------------- => niy                 , gt: unity               
+--hh--ii--s--tt--oo--a------------------- => histoa              , gt: history             
+--t-e---l---e--------------s-i---o---nn-- => telesion            , gt: television          
+(epoch: 2, iters: 9072, time: 0.011, data: 0.000) G: 6.719 D: 0.004 Dreal: 0.004 Dfake: 0.000 OCR_real: 6.739 OCR_fake: 1.668 grad_fake_OCR: 0.114 grad_fake_adv: 0.114 
+######## fake images OCR prediction ########
+---------tt---o--ll--aa------ => tola                , gt: citolas             
+--o--a---s------------------- => oas                 , gt: babis               
+######## real images OCR prediction ########
+--t--------------------p----------------- => tp                  , gt: through             
+--t--r---a----------t-i---o-------------- => tratio              , gt: tradition           
+--e---n----y----o--n--ee----------------- => enyone              , gt: anyone              
+(epoch: 2, iters: 9472, time: 0.011, data: 0.000) G: 3.826 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 11.127 OCR_fake: 0.911 grad_fake_OCR: 0.145 grad_fake_adv: 0.145 
+######## fake images OCR prediction ########
+-----i---tt--o----l--a---s--- => itolas              , gt: citolas             
+--s--a---s------------------- => sas                 , gt: babis               
+######## real images OCR prediction ########
+--t--e--rr----y-------------------------- => tery                , gt: very                
+--i---t---s------------------------------ => its                 , gt: its                 
+--t--------s--s-------------------------- => tss                 , gt: when                
+(epoch: 2, iters: 9872, time: 0.019, data: 0.000) G: 2.544 D: 0.183 Dreal: 0.000 Dfake: 0.183 OCR_real: 5.692 OCR_fake: 1.153 grad_fake_OCR: 0.178 grad_fake_adv: 0.178 
+######## fake images OCR prediction ########
+-----i---tt--o---ll--a---s--- => itolas              , gt: citolas             
+--s--a---s------------------- => sas                 , gt: babis               
+######## real images OCR prediction ########
+--------e---l---dd--------------------------- => eld                 , gt: could               
+--------------------------------------------- =>                     , gt: grey                
+--b--------n---p--e--nn---------------------- => bnpen               , gt: happen              
+(epoch: 2, iters: 10272, time: 0.011, data: 0.000) G: 4.960 D: 0.098 Dreal: 0.098 Dfake: 0.000 OCR_real: 9.064 OCR_fake: 1.129 grad_fake_OCR: 0.162 grad_fake_adv: 0.162 
+######## fake images OCR prediction ########
+---------tt-------l--a---s--- => tlas                , gt: citolas             
+-----a---s------------------- => as                  , gt: babis               
+######## real images OCR prediction ########
+--t---h--ee-------------------------------------- => the                 , gt: the                 
+--w-------c---l-------a---r---------------------- => wclar               , gt: nuclear             
+--w-----h--ii-c---h------------------------------ => which               , gt: which               
+(epoch: 2, iters: 10672, time: 0.012, data: 0.000) G: 3.940 D: 0.329 Dreal: 0.251 Dfake: 0.077 OCR_real: 4.561 OCR_fake: 1.381 grad_fake_OCR: 0.088 grad_fake_adv: 0.088 
+######## fake images OCR prediction ########
+-----i----t------ll--a---s--- => itlas               , gt: citolas             
+-----o---s------------------- => os                  , gt: babis               
+######## real images OCR prediction ########
+--r---e--g--e--------e---r--a---tt-ii-n---n------ => regeeratinn         , gt: regeneration        
+--s---------------------------------------------- => s                   , gt: 36                  
+--a---------------------------------------------- => a                   , gt: a                   
+(epoch: 2, iters: 11072, time: 0.011, data: 0.000) G: 5.100 D: 0.205 Dreal: 0.039 Dfake: 0.165 OCR_real: 3.684 OCR_fake: 1.715 grad_fake_OCR: 0.161 grad_fake_adv: 0.162 
+######## fake images OCR prediction ########
+-----i---tt---o---l--aa--ss-- => itolas              , gt: citolas             
+--s--a---s------------------- => sas                 , gt: babis               
+######## real images OCR prediction ########
+--w----o--t-------------------------- => wot                 , gt: Not                 
+--s---t-oo---u---t------------------- => stout               , gt: stout               
+--a---d--ee---g---n---a----t-ee------ => adegnate            , gt: adequate            
+(epoch: 2, iters: 11472, time: 0.019, data: 0.000) G: 3.697 D: 0.133 Dreal: 0.000 Dfake: 0.133 OCR_real: 5.532 OCR_fake: 0.943 grad_fake_OCR: 0.134 grad_fake_adv: 0.134 
+######## fake images OCR prediction ########
+-----i---tt---o--ll--a---s--- => itolas              , gt: citolas             
+--o--a---s------------------- => oas                 , gt: babis               
+######## real images OCR prediction ########
+--b--e---ee---n-------------------------- => been                , gt: been                
+----------a----ddd----------------------- => ad                  , gt: heard               
+--i--n----------------------------------- => in                  , gt: in                  
+(epoch: 2, iters: 11872, time: 0.011, data: 0.000) G: 2.633 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 3.545 OCR_fake: 1.505 grad_fake_OCR: 0.156 grad_fake_adv: 0.156 
+######## fake images OCR prediction ########
+-----i----t--o----l--a---s--- => itolas              , gt: citolas             
+--o--a---s------------------- => oas                 , gt: babis               
+######## real images OCR prediction ########
+--b---g---------------------------------- => bg                  , gt: by                  
+---------o--pp---t---ee------------------ => opte                , gt: People              
+--t---h-----ii-e------------------------- => thie                , gt: United              
+(epoch: 2, iters: 12272, time: 0.011, data: 0.000) G: 3.757 D: 0.173 Dreal: 0.173 Dfake: 0.000 OCR_real: 2.305 OCR_fake: 0.680 grad_fake_OCR: 0.149 grad_fake_adv: 0.151 
+######## fake images OCR prediction ########
+-----i----t--o---ll--a---s--- => itolas              , gt: citolas             
+--a--a---s------------------- => aas                 , gt: babis               
+######## real images OCR prediction ########
+--s------a--m----i----------------------------------- => sami                , gt: family              
+--s---t--o---n---d----a----dd------------------------ => stondad             , gt: standard            
+--w----o---v---l--d---------------------------------- => wovld               , gt: would               
+(epoch: 2, iters: 12672, time: 0.012, data: 0.000) G: 1.817 D: 0.180 Dreal: 0.154 Dfake: 0.026 OCR_real: 4.931 OCR_fake: 1.652 grad_fake_OCR: 0.176 grad_fake_adv: 0.176 
+saving the latest model (epoch 2, total_iters 60000)
+######## fake images OCR prediction ########
+-----i---tt--oo--ll--a---s--- => itolas              , gt: citolas             
+--o--a---s------------------- => oas                 , gt: babis               
+######## real images OCR prediction ########
+--t---e---a----c--l---------------------- => teacl               , gt: teacher             
+--o-----g----m----t---------------------- => ogmt                , gt: ought               
+--s----------e---i-ll-a------------------ => seila               , gt: Sheila              
+(epoch: 2, iters: 13072, time: 0.019, data: 0.000) G: 2.068 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 10.138 OCR_fake: 1.842 grad_fake_OCR: 0.170 grad_fake_adv: 0.170 
+######## fake images OCR prediction ########
+-----ii---t--o---ll--a---s--- => itolas              , gt: citolas             
+--o--a---s------------------- => oas                 , gt: babis               
+######## real images OCR prediction ########
+--b---o---o---t---ss------------------------- => boots               , gt: books               
+--t----e----s---o-----s---------------------- => tesos               , gt: 1830's              
+---------yy---------------------------------- => y                   , gt: leg                 
+(epoch: 2, iters: 13472, time: 0.011, data: 0.000) G: 2.792 D: 0.036 Dreal: 0.015 Dfake: 0.021 OCR_real: 9.418 OCR_fake: 1.925 grad_fake_OCR: 0.176 grad_fake_adv: 0.177 
+######## fake images OCR prediction ########
+---------tt--o----l--a---s--- => tolas               , gt: citolas             
+--r--a---s------------------- => ras                 , gt: babis               
+######## real images OCR prediction ########
+--h---a---ss--------------------------------- => has                 , gt: has                 
+---t--hh---e--------------------------------- => the                 , gt: the                 
+--w---e-------------------------------------- => we                  , gt: we                  
+(epoch: 2, iters: 13872, time: 0.012, data: 0.000) G: 6.356 D: 0.018 Dreal: 0.018 Dfake: 0.000 OCR_real: 2.820 OCR_fake: 1.195 grad_fake_OCR: 0.200 grad_fake_adv: 0.200 
+######## fake images OCR prediction ########
+---------tt---o--ll--a---ss-- => tolas               , gt: citolas             
+--o--a---s------------------- => oas                 , gt: babis               
+######## real images OCR prediction ########
+--h----a---s------------------------------------- => has                 , gt: has                 
+--ee---a---ii-----p--ee--d----------------------- => eaiped              , gt: enjoyed             
+-ii--n------------------------------------------- => in                  , gt: in                  
+(epoch: 2, iters: 14272, time: 0.012, data: 0.000) G: 4.317 D: 0.502 Dreal: 0.455 Dfake: 0.048 OCR_real: 6.463 OCR_fake: 1.448 grad_fake_OCR: 0.192 grad_fake_adv: 0.192 
+######## fake images OCR prediction ########
+--r--ii--tt--oo--ll--a----s-- => ritolas             , gt: citolas             
+--a--a---s------------------- => aas                 , gt: babis               
+######## real images OCR prediction ########
+--t----o--rr--------------------- => tor                 , gt: Nor                 
+--s--a---ii---------------------- => sai                 , gt: said                
+--s---b---r--ii---d----e--------- => sbride              , gt: stride              
+(epoch: 2, iters: 14672, time: 0.019, data: 0.000) G: 1.997 D: 0.097 Dreal: 0.000 Dfake: 0.097 OCR_real: 5.676 OCR_fake: 1.990 grad_fake_OCR: 0.209 grad_fake_adv: 0.209 
+######## fake images OCR prediction ########
+-----ii---t---o---l--a----s-- => itolas              , gt: citolas             
+--a--a----------------------- => aa                  , gt: babis               
+######## real images OCR prediction ########
+--w---h---ii--ss----------------------------------------- => whis                , gt: this                
+--o---l---d---------------------------------------------- => old                 , gt: old                 
+--t--o---oo---t------------------------------------------ => toot                , gt: took                
+(epoch: 2, iters: 15072, time: 0.012, data: 0.000) G: 5.382 D: 1.240 Dreal: 0.509 Dfake: 0.731 OCR_real: 6.630 OCR_fake: 1.517 grad_fake_OCR: 0.192 grad_fake_adv: 0.192 
+######## fake images OCR prediction ########
+-----i---tt--oo---l--a----s-- => itolas              , gt: citolas             
+--a--a---s------------------- => aas                 , gt: babis               
+######## real images OCR prediction ########
+--c--a---n----e-------------------------- => cane                , gt: came                
+--a----d----ii--s--ee-------------------- => adise               , gt: advise              
+--a---tt--------------------------------- => at                  , gt: at                  
+(epoch: 2, iters: 15472, time: 0.011, data: 0.000) G: 6.077 D: 0.325 Dreal: 0.325 Dfake: 0.000 OCR_real: 3.631 OCR_fake: 1.285 grad_fake_OCR: 0.172 grad_fake_adv: 0.172 
+######## fake images OCR prediction ########
+-----ii--tt--oo---l--a---ss-- => itolas              , gt: citolas             
+--o--a---e------------------- => oae                 , gt: babis               
+######## real images OCR prediction ########
+--a-------t---------------------- => at                  , gt: out                 
+--------p----n-i--l-------------- => pnil                , gt: April               
+--h--------s--------------------- => hs                  , gt: was                 
+(epoch: 2, iters: 15872, time: 0.010, data: 0.000) G: 5.031 D: 1.254 Dreal: 0.000 Dfake: 1.254 OCR_real: 6.827 OCR_fake: 1.105 grad_fake_OCR: 0.146 grad_fake_adv: 0.146 
+######## fake images OCR prediction ########
+-----ii---t--o----l--a----s-- => itolas              , gt: citolas             
+--o--a---e------------------- => oae                 , gt: babis               
+######## real images OCR prediction ########
+--a---s-------------------------------------- => as                  , gt: as                  
+--T-----e------------------------------------ => Te                  , gt: The                 
+--cc---h----a---r------c--t--e--------------- => charcte             , gt: character           
+(epoch: 2, iters: 16272, time: 0.020, data: 0.000) G: 3.310 D: 0.012 Dreal: 0.000 Dfake: 0.012 OCR_real: 12.108 OCR_fake: 1.800 grad_fake_OCR: 0.134 grad_fake_adv: 0.134 
+######## fake images OCR prediction ########
+-----ii---t--o----l--a---s--- => itolas              , gt: citolas             
+-----a---e------------------- => ae                  , gt: babis               
+######## real images OCR prediction ########
+--m-------t-------------------------- => mt                  , gt: not                 
+--T---r------------------------------ => Tr                  , gt: Dr                  
+--w------iii------------------------- => wi                  , gt: will                
+(epoch: 2, iters: 16672, time: 0.011, data: 0.000) G: 4.816 D: 0.070 Dreal: 0.016 Dfake: 0.054 OCR_real: 3.368 OCR_fake: 1.537 grad_fake_OCR: 0.247 grad_fake_adv: 0.247 
+######## fake images OCR prediction ########
+-----ii---t--oo---l--a----s-- => itolas              , gt: citolas             
+--n--a---e------------------- => nae                 , gt: babis               
+######## real images OCR prediction ########
+-----m----o---ee------------------------------------- => moe                 , gt: more                
+--c----n---e----------------------------------------- => cne                 , gt: One                 
+--d------ii-s----iiinnn---g---u-----i-s--e---r--dd--- => disinguiserd        , gt: distinguished       
+(epoch: 2, iters: 17072, time: 0.012, data: 0.000) G: 1.521 D: 0.093 Dreal: 0.070 Dfake: 0.023 OCR_real: 1.225 OCR_fake: 0.915 grad_fake_OCR: 0.117 grad_fake_adv: 0.117 
+######## fake images OCR prediction ########
+--c--ii--tt--oo---l--a---s--- => citolas             , gt: citolas             
+--a--a----------------------- => aa                  , gt: babis               
+######## real images OCR prediction ########
+--b---uu--t---------------------------------------------- => but                 , gt: but                 
+--s---o-------------------------------------------------- => so                  , gt: so                  
+--h---a--dd---------------------------------------------- => had                 , gt: had                 
+(epoch: 2, iters: 17472, time: 0.012, data: 0.000) G: 2.558 D: 0.858 Dreal: 0.856 Dfake: 0.002 OCR_real: 7.547 OCR_fake: 0.943 grad_fake_OCR: 0.122 grad_fake_adv: 0.122 
+######## fake images OCR prediction ########
+-----ii--tt--oo---l--a---s--- => itolas              , gt: citolas             
+--r--a---e------------------- => rae                 , gt: babis               
+######## real images OCR prediction ########
+--o---n----e----------------------------- => one                 , gt: one                 
+--ii-n----------------------------------- => in                  , gt: in                  
+--a-------------------------------------- => a                   , gt: a                   
+(epoch: 2, iters: 17872, time: 0.019, data: 0.000) G: 3.378 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 3.753 OCR_fake: 1.307 grad_fake_OCR: 0.147 grad_fake_adv: 0.147 
+######## fake images OCR prediction ########
+-----i---tt--oo--ll--a---s--- => itolas              , gt: citolas             
+--n--a---e-------s----------- => naes                , gt: babis               
+######## real images OCR prediction ########
+--m----o---s--k-------------------------- => mosk                , gt: most                
+--s--h-----m-------u---ll--a--l--e---dd-- => shmulaled           , gt: stimulated          
+--i------d---ee-------------------------- => ide                 , gt: aide                
+(epoch: 2, iters: 18272, time: 0.011, data: 0.000) G: 4.103 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 4.659 OCR_fake: 1.317 grad_fake_OCR: 0.140 grad_fake_adv: 0.140 
+######## fake images OCR prediction ########
+--c--ii---t--oo---l--a---s--- => citolas             , gt: citolas             
+--r--a---e-------s----------- => raes                , gt: babis               
+######## real images OCR prediction ########
+--c------e----n---------------------------------- => cen                 , gt: decent              
+--t---a-------k----s----------------------------- => taks                , gt: talks               
+--t-h---e---------------------------------------- => the                 , gt: the                 
+(epoch: 2, iters: 18672, time: 0.012, data: 0.000) G: 0.723 D: 0.314 Dreal: 0.000 Dfake: 0.314 OCR_real: 10.096 OCR_fake: 1.341 grad_fake_OCR: 0.184 grad_fake_adv: 0.184 
+######## fake images OCR prediction ########
+--c--ii--tt--o---ll--a---ss-- => citolas             , gt: citolas             
+--r--a---e------------------- => rae                 , gt: babis               
+######## real images OCR prediction ########
+--t--hh---a--tt------------------------------ => that                , gt: that                
+--h---e---u---n------------------------------ => heun                , gt: been                
+--w---hh---s--t------------------------------ => whst                , gt: what                
+(epoch: 2, iters: 19072, time: 0.011, data: 0.000) G: 2.388 D: 0.210 Dreal: 0.000 Dfake: 0.210 OCR_real: 0.124 OCR_fake: 1.047 grad_fake_OCR: 0.114 grad_fake_adv: 0.115 
+######## fake images OCR prediction ########
+--c--ii--tt--oo---l--a---ss-- => citolas             , gt: citolas             
+--r--a---e------------------- => rae                 , gt: babis               
+######## real images OCR prediction ########
+--a---n---------------------------------------------------------------------- => an                  , gt: an                  
+--t-------------------------------------------------------------------------- => t                   , gt: New                 
+--pp---o---------c--o-----u---m------u-------ii--tt-------------------------- => pocoumuit           , gt: pro-communist       
+(epoch: 2, iters: 19472, time: 0.024, data: 0.000) G: 5.318 D: 3.163 Dreal: 3.163 Dfake: 0.000 OCR_real: 13.067 OCR_fake: 0.702 grad_fake_OCR: 0.076 grad_fake_adv: 0.076 
+######## fake images OCR prediction ########
+-----ii---t--o----l--a---s--- => itolas              , gt: citolas             
+--r--a---e------------------- => rae                 , gt: babis               
+######## real images OCR prediction ########
+--a-------------------------------------- => a                   , gt: a                   
+--dd-------iii----n----s--e---d---------- => dinsed              , gt: discussed           
+--T---h--iii--ss------------------------- => This                , gt: This                
+(epoch: 2, iters: 19872, time: 0.011, data: 0.000) G: 3.026 D: 1.915 Dreal: 0.000 Dfake: 1.915 OCR_real: 7.721 OCR_fake: 1.002 grad_fake_OCR: 0.146 grad_fake_adv: 0.146 
+######## fake images OCR prediction ########
+--c--ii---t---o---l--a---ss-- => citolas             , gt: citolas             
+--r--n---e------------------- => rne                 , gt: babis               
+######## real images OCR prediction ########
+--o---r----b--ii--t------------------ => orbit               , gt: orbit               
+-----------c---lee--aa---r----------- => clear               , gt: nuclear             
+--s---i------------------------------ => si                  , gt: it                  
+(epoch: 2, iters: 20272, time: 0.011, data: 0.000) G: 5.981 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 10.158 OCR_fake: 1.357 grad_fake_OCR: 0.166 grad_fake_adv: 0.166 
+######## fake images OCR prediction ########
+--c--ii--tt--o----l--a------- => citola              , gt: citolas             
+--a--n---e------------------- => ane                 , gt: babis               
+######## real images OCR prediction ########
+--t--hh--e--------------------------- => the                 , gt: the                 
+--t---o------------------------------ => to                  , gt: to                  
+----t----a---l------a-----n---------- => talan               , gt: Italian             
+(epoch: 2, iters: 20672, time: 0.011, data: 0.000) G: 4.248 D: 0.094 Dreal: 0.094 Dfake: 0.000 OCR_real: 4.886 OCR_fake: 1.269 grad_fake_OCR: 0.154 grad_fake_adv: 0.154 
+######## fake images OCR prediction ########
+--c--ii---t--oo---l--aa---s-- => citolas             , gt: citolas             
+--r--a---e------------------- => rae                 , gt: babis               
+######## real images OCR prediction ########
+--t---h---ee--------------------- => the                 , gt: the                 
+--i----e--t---------------------- => iet                 , gt: met                 
+--b-------s---------------------- => bs                  , gt: You                 
+(epoch: 2, iters: 21072, time: 0.020, data: 0.000) G: 2.933 D: 0.126 Dreal: 0.000 Dfake: 0.126 OCR_real: 1.984 OCR_fake: 0.515 grad_fake_OCR: 0.046 grad_fake_adv: 0.047 
+######## fake images OCR prediction ########
+--c--ii---t--oo---l--aa--ss-- => citolas             , gt: citolas             
+--r--a---e------------------- => rae                 , gt: babis               
+######## real images OCR prediction ########
+---pp------iinn--t------------------- => pint                , gt: point               
+--t---o------------------------------ => to                  , gt: to                  
+--h--------------e------------------- => he                  , gt: issue               
+(epoch: 2, iters: 21472, time: 0.011, data: 0.000) G: 2.016 D: 0.000 Dreal: 0.000 Dfake: 0.000 OCR_real: 7.580 OCR_fake: 0.514 grad_fake_OCR: 0.053 grad_fake_adv: 0.053 
+######## fake images OCR prediction ########
+--c--ii---t--oo---l--aa---s-- => citolas             , gt: citolas             
+--r--n---e-------s----------- => rnes                , gt: babis               
+######## real images OCR prediction ########
+---hh---a-------------------- => ha                  , gt: has                 
+--t--e----------------------- => te                  , gt: ten                 
+--e--ee---ss--t-------------- => eest                , gt: best                
+(epoch: 2, iters: 21872, time: 0.010, data: 0.000) G: 3.917 D: 0.149 Dreal: 0.000 Dfake: 0.149 OCR_real: 5.520 OCR_fake: 0.901 grad_fake_OCR: 0.114 grad_fake_adv: 0.114 
+######## fake images OCR prediction ########
+--c--ii--tt--o----l--a---ss-- => citolas             , gt: citolas             
+--r--n---e-------s----------- => rnes                , gt: babis               
+######## real images OCR prediction ########
+--w---hh----ii-ll-ee----------------- => while               , gt: while               
+--l--s------------------------------- => ls                  , gt: 's                  
+--v---i--s---ii--tt------------------ => visit               , gt: visit               
+(epoch: 2, iters: 22272, time: 0.010, data: 0.000) G: 4.070 D: 0.023 Dreal: 0.000 Dfake: 0.023 OCR_real: 3.923 OCR_fake: 0.670 grad_fake_OCR: 0.089 grad_fake_adv: 0.089 
+######## fake images OCR prediction ########
+--c--ii--tt--o----l--a---ss-- => citolas             , gt: citolas             
+--p--a---e------------------- => pae                 , gt: babis               
+######## real images OCR prediction ########
+--t---e-------------------------------------- => te                  , gt: He                  
+--a---g---aa-----n---ss--t------------------- => aganst              , gt: against             
+--b---l--o---w----n-------------------------- => blown               , gt: blown               
+(epoch: 2, iters: 22672, time: 0.020, data: 0.000) G: 5.430 D: 0.053 Dreal: 0.046 Dfake: 0.007 OCR_real: 5.963 OCR_fake: 0.916 grad_fake_OCR: 0.133 grad_fake_adv: 0.133 
+saving the latest model (epoch 2, total_iters 70000)
+######## fake images OCR prediction ########
+--c--ii--tt--oo---l--a---s--- => citolas             , gt: citolas             
+--p--n---e------------------- => pne                 , gt: babis               
+######## real images OCR prediction ########
+--w----e---s----------------------------- => wes                 , gt: was                 
+--w----a---s----------------------------- => was                 , gt: was                 
+--a----u---aa---l---i---t-ii--e---s------ => aualities           , gt: qualities           
+(epoch: 2, iters: 23072, time: 0.011, data: 0.000) G: 4.834 D: 0.005 Dreal: 0.005 Dfake: 0.000 OCR_real: 5.037 OCR_fake: 1.183 grad_fake_OCR: 0.107 grad_fake_adv: 0.107 
+######## fake images OCR prediction ########
+--c--ii---t--oo---l--a---ss-- => citolas             , gt: citolas             
+--p--n---e------------------- => pne                 , gt: babis               
+######## real images OCR prediction ########
+--s-----c---o---n---------s-------------- => scons               , gt: seconds             
