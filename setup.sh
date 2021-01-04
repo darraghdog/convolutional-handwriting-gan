@@ -20,3 +20,13 @@ wget https://github.com/jpuigcerver/Laia/raw/master/egs/iam/data/part/lines/orig
 wget https://github.com/jpuigcerver/Laia/raw/master/egs/iam/data/part/lines/original/tr.lst -O Datasets/IAM/original_partition/tr.lst
 wget https://github.com/jpuigcerver/Laia/raw/master/egs/iam/data/part/lines/original/va1.lst -O Datasets/IAM/original_partition/va1.lst
 wget https://github.com/jpuigcerver/Laia/raw/master/egs/iam/data/part/lines/original/va2.lst -O Datasets/IAM/original_partition/va2.lst
+
+
+: '
+cd docker/
+docker build -t scrabblegan -f DockerFile.docker .
+cd ..
+docker run -itd --name SCRABBLEV01 -v $PWD:/mount  --shm-size=128G --gpus '"device=4"' --rm scrabblegan:latest
+docker attach SCRABBLEV01
+'
+
