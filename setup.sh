@@ -31,8 +31,7 @@ docker attach SCRABBLEV01
 # Create dataset database
 python data/create_text_data.py 
 # Start training - supervised only
-python train.py --name_prefix demo --dataname IAMcharH32W16rmPunct --capitalize --no_html --gpu_ids 0 batch_size 16
-
+nohup python train.py --name_prefix demo --dataname IAMcharH32W16rmPunct --capitalize --no_html --gpu_ids 0 batch_size 16 &> nohup_scrabblegan_supervised_v01.out &
 #python train_semi_supervised.py --dataname IAMcharH32W16rmPunct --unlabeled_dataname CVLtrH32 --disjoint
 
 '
