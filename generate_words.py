@@ -37,23 +37,20 @@ def generate_image(word, seed = None):
     z, _ = prepare_z_y(1, 128, 80, device='cpu', seed=seed)
     res = model.forward(z=z, y=words)
     res = res.detach().numpy()[0, 0] * 255
-    im = Image.fromarray(res).convert('RGB')
+    im = np.array(Image.fromarray(res).convert('RGB'))
     return im
+
+def fill_space(w):
+    return np.ones((32, w, 3), dtype = np.uint8)*255
 
 # SHIBUYA SOLASTA 14F, 1-21-1 Dogenzaka, Shibuya, Tokyo, 150-0043 Japan
 img = generate_image('Here we go, Tatsuya')
-img
+Image.fromarray(img)
 
 SEED = 10001
 addr = 'SHIBUYA SOLASTA 14F, 1-21-1 Dogenzaka, Shibuya, Tokyo, 150-0043 Japan'
-ls = addr.split(', ')
-#ls = ['1-21-1 Dogenzaka,']*10
-buffer = np.ones((32, 10, 3), dtype = np.uint8)*255
-[ [ii for ii in i.split()] for i in ls]
-out = [[np.concatenate((np.array(generate_image(ii, seed = SEED)), buffer), 1) for ii in i.split()] for i in ls]
+out = [[np.concatenate((generate_image(ii, seed = SEED), fill_space(10)), 1) for ii in i.split()] for i in addr.split(', ')]
 out = [np.concatenate(w, 1) for w in out   ]
 max_w = max([i.shape[1] for i in out])
-
-out = [ np.concatenate((i, np.ones((32, 10 + max_w - i.shape[1],3), dtype = np.uint8)*255),1) for i in out]
+out = [ np.concatenate((i, fill_space( max_w - i.shape[1])),1) for i in out]
 Image.fromarray(np.concatenate(out, 0))
-
