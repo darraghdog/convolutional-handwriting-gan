@@ -33,24 +33,48 @@ from tqdm import tqdm
 from joblib import cpu_count, Parallel, delayed
 import torch
 from util.util import prepare_z_y
+import data.alphabets as alphabets
+
 import six
+
+device = 'cpu'
 
 if __name__ == '__main__':
     opt = TestManualOptions().parse()  # get test options
-    # hard-code some parameters for test
+    #opt = TrainOptions().parse()    # hard-code some parameters for test
     opt.num_threads = 0   # test code only supports num_threads = 1
     opt.batch_size = 1    # test code only supports batch_size = 1
     opt.serial_batches = True  # disable data shuffling; comment this line if results on randomly chosen images are needed.
     opt.no_flip = True    # no flip; comment this line if results on flipped images are needed.
     opt.display_id = -1   # no visdom display; the test code saves the results to a HTML file.
     opt.dataname = 'IAMcharH32W16rmPunct'
-    opt.dataroot = 'Datasets/IAM/h32char16to17/tr'
+    opt.dataroot = 'Datasets/IAM/words/h32char16to17/tr_removePunc'
     opt.name = '.'
+    opt.lex = 'Datasets/Lexicon/english_words.txt'
+    opt.batch_size=16
+    opt.load_iter = 0
+    opt.epoch= 140
+    opt.alphabet = alphabets.alphabetEnglish
+    opt.name='.'
+    opt.n_synth = '100,200'
+    opt.dataname= 'IAMcharH32W16rmPunct'
+    opt.dataroot = 'Datasets/IAM/words/h32char16to17/tr_removePunc'
     # --name_prefix demo --dataname IAMcharH32W16rmPunct --capitalize --no_html --gpu_ids 0 batch_size 16
     
     dataset = create_dataset(opt)  # create a dataset given opt.dataset_mode and other options
     model = create_model(opt)      # create a model given opt.model and other options
-    model.setup(opt)               # regular setup: load and print networks; create schedulers
+    #model.setup(opt)               # regular setup: load and print networks; create schedulers
+    
+    load_path = './checkpoints/140_net_D.pth'
+    state_dict = torch.load(load_path, map_location=str(model.device))
+    model.netD.load_state_dict(state_dict)
+    load_path = './checkpoints/140_net_G.pth'
+    state_dict = torch.load(load_path, map_location=str(model.device))
+    model.netG.load_state_dict(state_dict)
+    load_path = './checkpoints/140_net_OCR.pth'
+    state_dict = torch.load(load_path, map_location=str(model.device))
+    model.netOCR.load_state_dict(state_dict)
+    
     model.eval()
     exception_chars = ['ï', 'ü', '.', '_', 'ö', ',', 'ã', 'ñ']
     if opt.lex.endswith('.tsv'):
@@ -78,6 +102,7 @@ if __name__ == '__main__':
     env = [lmdb.open(env_path, map_size=1099511627776) for env_path in env_paths]
     n_synth = [int(i)*1000 for i in n_synth]
     max_n_synth = max(n_synth)
+    
 
     cache = {}
     cnt = 1
@@ -105,6 +130,7 @@ if __name__ == '__main__':
             z = nsamples*[z]
         words_encoded = []
         wordBins = []
+        print(words)
         for i in tqdm(range(len(words))):
             wordBin, word = GenImg(words[i], z[i])
             words_encoded.append(word)
