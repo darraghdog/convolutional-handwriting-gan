@@ -382,7 +382,7 @@ def createDataset(image_path_list, label_list, outputPath, mode, author_id, remo
             labelctr['mnist'] += 1
         
     nSamples = cnt - 1
-    cache['num-samples'] = str(nSamples)
+    cache['num-samples'] = str(cnt)#str(nSamples)
     writeCache(env, cache)
     env.close()
     print('Created dataset with %d samples' % nSamples)
