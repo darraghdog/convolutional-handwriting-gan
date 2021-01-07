@@ -435,7 +435,7 @@ if __name__ == '__main__':
     h_gap = 0           # Insert a gap below and above the text
     discard_wide = True # Discard images which have a character width 3 times larger than the maximum allowed character size (instead of resizing them) - this helps discard outlier images
     discard_narr = True # Discard images which have a character width 3 times smaller than the minimum allowed charcter size.
-    mnistsamp = 15000   # Number of mnist samples to add
+    mnistsamp = 30000   # Number of mnist samples to add
     
 
     image_path_list, label_list, outputPath, author_id = create_img_label_list(top_dir,iamdataset, mode, words, author_number, remove_punc)
