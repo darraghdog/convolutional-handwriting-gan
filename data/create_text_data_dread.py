@@ -440,8 +440,8 @@ if __name__ == '__main__':
 
     image_path_list, label_list, outputPath, author_id = create_img_label_list(top_dir,iamdataset, mode, words, author_number, remove_punc)
     image_path_list1, label_list1, _         , _         = create_img_label_list(top_dir,dreaddataset, mode, words, author_number, remove_punc)
-    #image_path_list+=image_path_list1
-    #label_list+=label_list1
+    image_path_list+=image_path_list1
+    label_list+=label_list1
     ctrdf = pd.DataFrame(Counter(list(''.join(label_list))).most_common(), columns = ['token', 'count'])
     ctrdf = ctrdf.sort_values('token').reset_index(drop= True)
     print(ctrdf)
