@@ -244,7 +244,7 @@ class ScrabbleGANBaseModel(BaseModel):
                         word = ''.join(word)
                     words[i] = word
             words = [word.encode('utf-8') for word in words]
-            print(words)
+            #print(words)
         if z is None:
             if not self.opt.single_writer:
                 self.z.sample_()
