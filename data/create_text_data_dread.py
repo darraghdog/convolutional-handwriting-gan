@@ -5,7 +5,7 @@ import os
 import platform
 import sys
 PATH = '/Users/dhanley/Documents/scrgan/' \
-    if platform.system() == 'Darwin' else '/mount/riiid'
+    if platform.system() == 'Darwin' else '/mount/scrgan'
 os.chdir(PATH)
 sys.path.append(PATH)
 import lmdb
