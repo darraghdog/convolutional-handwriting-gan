@@ -390,7 +390,7 @@ def createDataset(image_path_list, label_list, outputPath, mode, author_id, remo
 
 def createDict(label_list, top_dir, dataset, mode, words, remove_punc):
     lex_name = dataset+'_' + mode + (dataset in ['IAM','RIMES'])*('_words' * words) + (dataset=='IAM') * ('_removePunc' * remove_punc)
-    all_words = '-'.join(label_list).split('-')
+    all_words = '|||'.join(label_list).split('|||')
     unique_words = []
     words = []
     for x in tqdm(all_words):
