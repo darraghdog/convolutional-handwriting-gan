@@ -407,6 +407,7 @@ def createDict(label_list, top_dir, dataset, mode, words, remove_punc):
         file.write("\n".join(words))
     file.close()
 
+
 def printAlphabet(label_list):
     # get all unique alphabets - ignoring alphabet longer than one char
     all_chars = ''.join(label_list)
@@ -442,7 +443,7 @@ if __name__ == '__main__':
     h_gap = 0           # Insert a gap below and above the text
     discard_wide = True # Discard images which have a character width 3 times larger than the maximum allowed character size (instead of resizing them) - this helps discard outlier images
     discard_narr = True # Discard images which have a character width 3 times smaller than the minimum allowed charcter size.
-    mnistsamp = 30000   # Number of mnist samples to add
+    mnistsamp = 0   # Number of mnist samples to add
     
 
     image_path_list, label_list, outputPath, author_id = create_img_label_list(top_dir,iamdataset, mode, words, author_number, remove_punc)
@@ -459,5 +460,7 @@ if __name__ == '__main__':
         createDict(label_list, top_dir, iamdataset, mode, words, remove_punc)
     printAlphabet(label_list)
     
-    
+    numbers = ['-'.join([''.join(np.random.choice(9, 3).astype(str).tolist()) for i in range(3)]) for i in range(166550)]
+    with open(os.path.join(top_dir, 'Lexicon', 'dread_words.txt'), "w") as file:
+        file.write("\n".join(numbers))
     
