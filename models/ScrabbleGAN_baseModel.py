@@ -104,7 +104,7 @@ class ScrabbleGANBaseModel(BaseModel):
             self.lex = lex
         else:
             raise ValueError('could not load lexicon ')
-        self.fixed_noise_size = 2
+        self.fixed_noise_size = 10
         self.fixed_noise, self.fixed_fake_labels = prepare_z_y(self.fixed_noise_size, opt.dim_z,
                                        len(self.lex), device=self.device,
                                        fp16=opt.G_fp16, seed=opt.seed)
