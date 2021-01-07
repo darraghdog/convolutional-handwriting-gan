@@ -27,6 +27,7 @@ import pandas as pd
 from collections import Counter
 from scipy import ndimage
 from collections import defaultdict
+import keras
 
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows',1000)
@@ -61,6 +62,14 @@ def remove_border(img, border = 6):
     imgcliph = min(img.shape[0] - border * 2, 54)
     imgout[:imgcliph] = img[border:-border,border:-border]
     return imgout
+
+def filter_mnist(img):
+    rfrom, rto = np.where(img.min(0)<255)[0][[0,-1]]
+    cfrom, cto = np.where(img.min(1)<255)[0][[0,-1]]
+    h,w = img.shape[:2]
+    rfrom, cfrom = max(rfrom-1,0), max(cfrom-1,0)
+    rto, cto = max(rto+1,w), min(cto+1,h)
+    return img[cfrom:cto, rfrom:rto]
 
 #def remove_border(img, border = 6):
 #    return img[border:-border,border:-border]
@@ -255,7 +264,8 @@ def create_img_label_list(top_dir,dataset, mode, words, author_number, remove_pu
 
     return image_path_list, label_list, output_dir, author_id
 
-def createDataset(image_path_list, label_list, outputPath, mode, author_id, remove_punc, resize, imgH, init_gap, h_gap, charminW, charmaxW, discard_wide, discard_narr, labeled):
+def createDataset(image_path_list, label_list, outputPath, mode, author_id, remove_punc, \
+                  resize, imgH, init_gap, h_gap, charminW, charmaxW, discard_wide, discard_narr, labeled):
     assert (len(image_path_list) == len(label_list))
     nSamples = len(image_path_list)
 
@@ -274,7 +284,6 @@ def createDataset(image_path_list, label_list, outputPath, mode, author_id, remo
     cache = {}
     cnt = 1
     labelctr = defaultdict(int)
-
     for i in tqdm(range(nSamples)):
         
         imagePath = image_path_list[i]
@@ -288,19 +297,15 @@ def createDataset(image_path_list, label_list, outputPath, mode, author_id, remo
         except:
             continue
         
-        '''
-        imgls = [remove_border(cv2.imread(f'{INPATH}/cck25k/{f}_1.png')[:,:,::-1]) for t,f in adf.id.sample(50).iteritems()]
-        imgls = [remove_space(i, threshold = 40) for i in imgls]
-        # pd.Series(i.shape[1] for i in imgls).hist(bins = 100)
-        imgls = [255-i for i in imgls if (i.shape[1]>250) &  (i.shape[1]<500) ]
-        '''
-        
         if 'dread' in imagePath:
             immat = np.array(im.convert('RGB'))
             immat = remove_border(immat)
             immat = remove_space(immat, threshold = 40)
             immat = 255 - immat
-            immat = cv2.cvtColor(immat, cv2.COLOR_BGR2GRAY)
+            try:
+                immat = cv2.cvtColor(immat, cv2.COLOR_BGR2GRAY)
+            except:
+                continue
             if not ((immat.shape[1]>250) &  (immat.shape[1]<500)):
                 print('%s has a width larger outside the 250 to 500 threshold for numbers'% imagePath)
                 continue
@@ -330,13 +335,12 @@ def createDataset(image_path_list, label_list, outputPath, mode, author_id, remo
             new_im = Image.new("RGB", (new_width+init_gap, imgH), color=(256,256,256))
             new_im.paste(im, (abs(init_w), h_gap))
             im = new_im
-
+        
         imgByteArr = io.BytesIO()
         im.save(imgByteArr, format='tiff')
         wordBin = imgByteArr.getvalue()
         imageKey = 'image-%09d' % cnt
         labelKey = 'label-%09d' % cnt
-
         cache[imageKey] = wordBin
         if labeled:
             cache[labelKey] = label
@@ -346,7 +350,30 @@ def createDataset(image_path_list, label_list, outputPath, mode, author_id, remo
             print('Written %d / %d' % (cnt, nSamples))
         cnt += 1
         labelctr[imagePath.split('/')[1]] += 1
-
+        
+    if mnistsamp>0:
+        (x_train, y_train), _ = keras.datasets.mnist.load_data()
+        x_train, y_train = 255-x_train[:mnistsamp], y_train[:mnistsamp]
+        
+        mnist_images = [Image.fromarray(num).resize((32, 32)) for num in x_train]
+        mnist_labels = [str(l) for l in y_train]
+        print(f'Add {len(mnist_images)} mnist images.')
+        for im, label in zip(mnist_images, mnist_labels):
+            imgByteArr = io.BytesIO()
+            im.save(imgByteArr, format='tiff')
+            wordBin = imgByteArr.getvalue()
+            imageKey = 'image-%09d' % cnt
+            labelKey = 'label-%09d' % cnt
+            cache[imageKey] = wordBin
+            if labeled:
+                cache[labelKey] = label
+            if cnt % 1000 == 0:
+                writeCache(env, cache)
+                cache = {}
+                print('Written %d / %d' % (cnt, nSamples))
+            cnt += 1
+            labelctr['mnist'] += 1
+        
     nSamples = cnt - 1
     cache['num-samples'] = str(nSamples)
     writeCache(env, cache)
@@ -408,6 +435,8 @@ if __name__ == '__main__':
     h_gap = 0           # Insert a gap below and above the text
     discard_wide = True # Discard images which have a character width 3 times larger than the maximum allowed character size (instead of resizing them) - this helps discard outlier images
     discard_narr = True # Discard images which have a character width 3 times smaller than the minimum allowed charcter size.
+    mnistsamp = 15000   # Number of mnist samples to add
+    
 
     image_path_list, label_list, outputPath, author_id = create_img_label_list(top_dir,iamdataset, mode, words, author_number, remove_punc)
     image_path_list1, label_list1, _         , _         = create_img_label_list(top_dir,dreaddataset, mode, words, author_number, remove_punc)
