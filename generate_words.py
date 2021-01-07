@@ -12,7 +12,7 @@ def load_model():
     opt.n_classes = 80
     gen = Generator(**vars(opt))
 
-    state_dict = torch.load('./checkpoints/140_net_G.pth')
+    state_dict = torch.load('./checkpoints/dreadiam/100_net_G.pth')
     if hasattr(state_dict, '_metadata'):
         del state_dict._metadata
     gen.load_state_dict(state_dict)
@@ -30,7 +30,7 @@ def get_word(word):
         words[0, i, code] = 1
     return words
 
-def generate_image(word, seed = None):
+def generate_image(word = 'meet', seed = None):
     if seed is None:
         seed = np.random.randint(0, 10e4)
     words = get_word(word)
@@ -40,17 +40,28 @@ def generate_image(word, seed = None):
     im = np.array(Image.fromarray(res).convert('RGB'))
     return im
 
+
 def fill_space(w):
     return np.ones((32, w, 3), dtype = np.uint8)*255
+
+img = generate_image('090-6535-5152')
+Image.fromarray(img)
 
 # SHIBUYA SOLASTA 14F, 1-21-1 Dogenzaka, Shibuya, Tokyo, 150-0043 Japan
 img = generate_image('Here we go, Tatsuya')
 Image.fromarray(img)
 
-SEED = 10001
+SEED = 100
 addr = 'SHIBUYA SOLASTA 14F, 1-21-1 Dogenzaka, Shibuya, Tokyo, 150-0043 Japan'
 out = [[np.concatenate((generate_image(ii, seed = SEED), fill_space(10)), 1) for ii in i.split()] for i in addr.split(', ')]
 out = [np.concatenate(w, 1) for w in out   ]
+max_w = max([i.shape[1] for i in out])
+out = [ np.concatenate((i, fill_space( max_w - i.shape[1])),1) for i in out]
+Image.fromarray(np.concatenate(out, 0))
+
+s='Deep learning on the cloud and at the edge'
+out = [np.concatenate([np.concatenate((generate_image(ii, seed = tt), fill_space(random.randint(5, 10))), 1) \
+                       for t, ii in enumerate(s.split())], 1) for tt in range(6)]
 max_w = max([i.shape[1] for i in out])
 out = [ np.concatenate((i, fill_space( max_w - i.shape[1])),1) for i in out]
 Image.fromarray(np.concatenate(out, 0))

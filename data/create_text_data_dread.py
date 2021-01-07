@@ -26,6 +26,7 @@ from itertools import compress
 import pandas as pd
 from collections import Counter
 from scipy import ndimage
+from collections import defaultdict
 
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows',1000)
@@ -33,13 +34,36 @@ pd.set_option('display.width', 1000)
 pd.set_option('display.float_format', lambda x: '%.3f' % x)
 
 
-def remove_space(img, threshold = 60, kernel_size = 2):
-    imgfilt = ndimage.minimum_filter(img, size=kernel_size)
-    rows = np.where(np.max(imgfilt, 0) > threshold)[0]
-    return img[:,rows]
+def remove_space(img, threshold = 40, kernel_size = 3, keepprop = 6, vborder = 3, resize = False):
+    # Filter horizontal
+    imgfilt = ndimage.minimum_filter(img[6:-6].max(2), size=kernel_size)
+    rows = np.max(imgfilt, 0) > threshold
+    from_,to_ = np.where(rows)[0][[0, -1]]
+    keeprand = np.random.choice(range(from_, to_), (to_-from_)//keepprop, replace=False)
+    rows[keeprand] = True
+    imgout = img[:,rows]
+    # Filter vertical
+    h,w,_ = imgout.shape
+    imgfilt = ndimage.minimum_filter(imgout[:, vborder:-vborder].max(2), size=kernel_size)
+    cols = np.where(np.max(imgfilt, 1) > threshold) [0]
+    from_ = 0 if cols[0] < 2 else  cols[0]+vborder
+    to_ = h if cols[-2]==h-2*vborder-1 else cols[-1]
+    imgout = imgout[from_:to_]
+    # rows = np.where(np.max(imgfilt, 0) > threshold)[0]
+    if resize:
+        # Rescale to imgin height
+        scale = h/imgout.shape[0] 
+        imgout = cv2.resize(imgout, (int(round(scale*imgout.shape[1])), h))
+    return imgout
 
 def remove_border(img, border = 6):
-    return img[border:-border,border:-border]
+    imgout = np.zeros((54, img.shape[1] - border * 2, 3), dtype=np.uint8)
+    imgcliph = min(img.shape[0] - border * 2, 54)
+    imgout[:imgcliph] = img[border:-border,border:-border]
+    return imgout
+
+#def remove_border(img, border = 6):
+#    return img[border:-border,border:-border]
 
 def checkImageIsValid(imageBin):
     if imageBin is None:
@@ -249,6 +273,7 @@ def createDataset(image_path_list, label_list, outputPath, mode, author_id, remo
     env = lmdb.open(outputPath, map_size=1099511627776)
     cache = {}
     cnt = 1
+    labelctr = defaultdict(int)
 
     for i in tqdm(range(nSamples)):
         
@@ -263,10 +288,22 @@ def createDataset(image_path_list, label_list, outputPath, mode, author_id, remo
         except:
             continue
         
+        '''
+        imgls = [remove_border(cv2.imread(f'{INPATH}/cck25k/{f}_1.png')[:,:,::-1]) for t,f in adf.id.sample(50).iteritems()]
+        imgls = [remove_space(i, threshold = 40) for i in imgls]
+        # pd.Series(i.shape[1] for i in imgls).hist(bins = 100)
+        imgls = [255-i for i in imgls if (i.shape[1]>250) &  (i.shape[1]<500) ]
+        '''
+        
         if 'dread' in imagePath:
-            immat = np.array(im)
-            immat = remove_border(immat, border = 6)
+            immat = np.array(im.convert('RGB'))
+            immat = remove_border(immat)
+            immat = remove_space(immat, threshold = 40)
             immat = 255 - immat
+            immat = cv2.cvtColor(immat, cv2.COLOR_BGR2GRAY)
+            if not ((immat.shape[1]>250) &  (immat.shape[1]<500)):
+                print('%s has a width larger outside the 250 to 500 threshold for numbers'% imagePath)
+                continue
             im = Image.fromarray(immat)
         
         if resize in ['charResize', 'keepRatio']:
@@ -308,12 +345,14 @@ def createDataset(image_path_list, label_list, outputPath, mode, author_id, remo
             cache = {}
             print('Written %d / %d' % (cnt, nSamples))
         cnt += 1
+        labelctr[imagePath.split('/')[1]] += 1
 
     nSamples = cnt - 1
     cache['num-samples'] = str(nSamples)
     writeCache(env, cache)
     env.close()
     print('Created dataset with %d samples' % nSamples)
+    print(f'Processed count of each class : {[f"{k}: {v}" for k,v in labelctr.items()]}')
 
 def createDict(label_list, top_dir, dataset, mode, words, remove_punc):
     lex_name = dataset+'_' + mode + (dataset in ['IAM','RIMES'])*('_words' * words) + (dataset=='IAM') * ('_removePunc' * remove_punc)
