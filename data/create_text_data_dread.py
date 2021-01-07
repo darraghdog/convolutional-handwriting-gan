@@ -352,11 +352,18 @@ def createDataset(image_path_list, label_list, outputPath, mode, author_id, remo
         labelctr[imagePath.split('/')[1]] += 1
         
     if mnistsamp>0:
+        ntotal = len(x_train)
         (x_train, y_train), _ = keras.datasets.mnist.load_data()
-        x_train, y_train = 255-x_train[:mnistsamp], y_train[:mnistsamp]
-        
-        mnist_images = [Image.fromarray(num).resize((32, 32)) for num in x_train]
-        mnist_labels = [str(l) for l in y_train]
+        x_train = 255-x_train
+        y_train = y_train.astype(str)
+        mnist_images, mnist_labels = [], []
+        for i in range(mnistsamp):
+            samp = np.random.choice(ntotal, 1+np.random.choice(6))
+            img = np.concatenate(list(x_train[samp.tolist()]) ,1  )
+            img = Image.fromarray(img).resize((32*len(samp), 32))
+            label = ''.join(y_train[samp.tolist()].tolist())
+            mnist_images.append(img)
+            mnist_labels.append(label)
         print(f'Add {len(mnist_images)} mnist images.')
         for im, label in zip(mnist_images, mnist_labels):
             imgByteArr = io.BytesIO()
