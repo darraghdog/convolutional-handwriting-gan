@@ -352,8 +352,8 @@ def createDataset(image_path_list, label_list, outputPath, mode, author_id, remo
         labelctr[imagePath.split('/')[1]] += 1
         
     if mnistsamp>0:
-        ntotal = len(x_train)
         (x_train, y_train), _ = keras.datasets.mnist.load_data()
+        ntotal = len(x_train)
         x_train = 255-x_train
         y_train = y_train.astype(str)
         mnist_images, mnist_labels = [], []
