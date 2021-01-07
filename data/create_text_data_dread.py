@@ -429,7 +429,7 @@ if __name__ == '__main__':
     words = True        # use words images, otherwise use lines
     #parameters relevant for IAM:
     author_number = -1  # use only images of a specific writer. If the value is -1, use all writers, otherwise use the index of this specific writer
-    remove_punc = True  # remove images which include only one punctuation mark from the list ['.', '', ',', '"', "'", '(', ')', ':', ';', '!']
+    remove_punc = False  # remove images which include only one punctuation mark from the list ['.', '', ',', '"', "'", '(', ')', ':', ';', '!']
 
     resize = 'charResize'  # charResize|keepRatio|noResize - type of resize,
                         # char - resize so that each character's width will be in a specific range (inside this range the width will be chosen randomly),
