@@ -346,7 +346,7 @@ def createDataset(image_path_list, label_list, outputPath, mode, author_id, remo
                 continue
             
             if not ((immat.shape[1]>150) &  (immat.shape[1]<500)):
-                print('%s has a width larger outside the 250 to 500 threshold for numbers'% imagePath)
+                print('%s has a width larger outside the 150 to 500 threshold for numbers'% imagePath)
                 continue
             im = Image.fromarray(immat)
             im
