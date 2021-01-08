@@ -277,7 +277,7 @@ def create_img_label_list(top_dir,dataset, mode, words, author_number, remove_pu
         adf = adf[adf.id.isin(imgnms)]
         image_path_list, label_list = [], []
         for t,row in adf.dropna().iterrows():
-            image_path = f'{root_dir}/cck25kcleannodash/{row.id}_1.png'
+            image_path = f'{root_dir}/cck25kcleannodash/{row.id}_2.png'
             label = row.number
             image_path_list.append(image_path)
             label_list.append(label)
@@ -334,17 +334,22 @@ def createDataset(image_path_list, label_list, outputPath, mode, author_id, remo
         
         if 'dread' in imagePath:
             immat = np.array(im.convert('RGB'))
-            immat = remove_border(immat)
-            immat = remove_space(immat, threshold = 40)
-            immat = 255 - immat
+            if 'clean' not in imagePath:
+                immat = remove_border(immat)
+
             try:
+                if 'cleannodash' not in imagePath:
+                    immat = remove_spacev1(immat, threshold = 40, keepprop = 1+ random.randrange(20))
+                immat = 255 - immat
                 immat = cv2.cvtColor(immat, cv2.COLOR_BGR2GRAY)
             except:
                 continue
-            if not ((immat.shape[1]>250) &  (immat.shape[1]<500)):
+            
+            if not ((immat.shape[1]>150) &  (immat.shape[1]<500)):
                 print('%s has a width larger outside the 250 to 500 threshold for numbers'% imagePath)
                 continue
             im = Image.fromarray(immat)
+            im
         
         if resize in ['charResize', 'keepRatio']:
             width, height = im.size
@@ -384,7 +389,9 @@ def createDataset(image_path_list, label_list, outputPath, mode, author_id, remo
             cache = {}
             print('Written %d / %d' % (cnt, nSamples))
         cnt += 1
-        labelctr[imagePath.split('/')[1]] += 1
+        
+        splpath = imagePath.split('/')
+        labelctr[splpath[1] + ('clean' in splpath[2])* (splpath[2]) ] += 1
         
     if mnistsamp>0:
         (x_train, y_train), _ = keras.datasets.mnist.load_data()
