@@ -15,6 +15,7 @@ import argparse
 import shutil
 import sys
 from PIL import Image
+import glob
 import random
 import io
 import xmltodict
@@ -55,6 +56,20 @@ def remove_space(img, threshold = 40, kernel_size = 3, keepprop = 6, vborder = 3
         # Rescale to imgin height
         scale = h/imgout.shape[0] 
         imgout = cv2.resize(imgout, (int(round(scale*imgout.shape[1])), h))
+    return imgout
+
+def remove_spacev1(img, threshold = 40, kernel_size = 2, keepprop = 6, out_height = 54):
+    # Filter horizontal
+    imgfilt = ndimage.minimum_filter(img[6:-6].max(2), size=kernel_size)
+    # Image.fromarray(imgfilt)
+    rows = np.max(imgfilt, 0) > threshold
+    from_,to_ = np.where(rows)[0][[0, -1]]
+    keeprand = np.random.choice(range(from_, to_), (to_-from_)//keepprop, replace=False)
+    rows[keeprand] = True
+    imgout = img[:,rows]
+    # Rescale to imgin height
+    scale = out_height/imgout.shape[0] 
+    imgout = cv2.resize(imgout, (int(round(scale*imgout.shape[1])), out_height))
     return imgout
 
 def remove_border(img, border = 6):
@@ -233,36 +248,56 @@ def create_img_label_list(top_dir,dataset, mode, words, author_number, remove_pu
                     
     elif dataset=='dread':
         anno_file = f'{root_dir}/cck25k.csv'
-        adf = pd.read_csv(anno_file, names = ['id', 'numberfull', 'number'])
+        adf = pd.read_csv(anno_file, names = ['id', 'numberfull', 'number'], dtype= str)
         image_path_list, label_list = [], []
         for t,row in adf.dropna().iterrows():
             image_path = f'{root_dir}/cck25k/{row.id}_1.png'
             label = row.numberfull
             image_path_list.append(image_path)
             label_list.append(label)
-        
-    '''
-    elif dataset=='RIMES':
-        if mode=='tr':
-            images_dir = os.path.join(root_dir, 'orig','training_WR')
-            gt_file = os.path.join(root_dir, 'orig',
-                               'groundtruth_training_icdar2011.txt')
-        elif mode=='te':
-            images_dir = os.path.join(root_dir, 'orig', 'testdataset_ICDAR')
-            gt_file = os.path.join(root_dir, 'orig',
-                                       'ground_truth_test_icdar2011.txt')
-        elif mode=='val':
-            images_dir = os.path.join(root_dir, 'orig', 'valdataset_ICDAR')
-            gt_file = os.path.join(root_dir, 'orig',
-                                       'ground_truth_validation_icdar2011.txt')
-        with open(gt_file, 'r') as f:
-            lines = f.readlines()
-        image_path_list = [os.path.join(images_dir, line.split(' ')[0]) for line in lines if len(line.split(' ')) > 1]
-
-        label_list = [line.split(' ')[1][:-1] for line in lines if len(line.split(' ')) > 1]
-    '''
+            
+    elif dataset=='dreadclean':
+        root_dir = root_dir.replace('dreadclean', 'dread')
+        anno_file = f'{root_dir}/cck25k.csv'
+        adf = pd.read_csv(anno_file, names = ['id', 'numberfull', 'number'], dtype=str)
+        imgnms = [i.split('/')[-1][:-6] for i in glob.glob(f'{root_dir}/cck25kclean/*')]
+        adf = adf[adf.id.isin(imgnms)]
+        image_path_list, label_list = [], []
+        for t,row in adf.dropna().iterrows():
+            image_path = f'{root_dir}/cck25kclean/{row.id}_1.png'
+            label = row.numberfull
+            image_path_list.append(image_path)
+            label_list.append(label)
+            
+    elif dataset=='dreadcleannodash':
+        root_dir = root_dir.replace('dreadcleannodash', 'dread')
+        anno_file = f'{root_dir}/cck25kcleannodash.csv'
+        adf = pd.read_csv(anno_file, dtype=str)
+        imgnms = [i.split('/')[-1][:-6] for i in glob.glob(f'{root_dir}/cck25kcleannodash/*')]
+        adf = adf[adf.id.isin(imgnms)]
+        image_path_list, label_list = [], []
+        for t,row in adf.dropna().iterrows():
+            image_path = f'{root_dir}/cck25kcleannodash/{row.id}_1.png'
+            label = row.number
+            image_path_list.append(image_path)
+            label_list.append(label)
 
     return image_path_list, label_list, output_dir, author_id
+
+'''
+adf = pd.read_csv(f'{INPATH}/cck25k.csv', names = ['id', 'numberfull', 'number'], dtype={'numberfull': str})
+imgls = [cv2.imread(f'{INPATH}/cck25kclean/{f}_1.png')[:,:,::-1] for t,f in adf.id.sample(50).iteritems()]
+imgls = [remove_spacev1(i, threshold = 40, keepprop = 1+ random.randrange(20)) for i in imgls]
+# pd.Series(i.shape[1] for i in imgls).hist(bins = 100)
+imgls = [255-i for i in imgls if (i.shape[1]>200) &  (i.shape[1]<500) ]
+bigimg = np.ones((len(imgls) * 54, 501, 3), dtype=np.uint8) * 255
+bigimg[:,:,2] = 255
+for t, img in enumerate(imgls):
+    h,w,c = img.shape
+    bigimg[t*h:(t+1)*h, :w] = img
+Image.fromarray(bigimg)
+'''
+
 
 def createDataset(image_path_list, label_list, outputPath, mode, author_id, remove_punc, \
                   resize, imgH, init_gap, h_gap, charminW, charmaxW, discard_wide, discard_narr, labeled):
@@ -422,7 +457,6 @@ def printAlphabet(label_list):
 if __name__ == '__main__':
     create_Dict = True # create a dictionary of the generated dataset
     iamdataset = 'IAM'     #CVL/IAM/RIMES/gw
-    dreaddataset = 'dread'     #CVL/IAM/RIMES/gw
     mode = 'tr'        # tr/te/val/va1/va2/all
     labeled = True
     top_dir = 'Datasets'
@@ -445,11 +479,16 @@ if __name__ == '__main__':
     discard_narr = True # Discard images which have a character width 3 times smaller than the minimum allowed charcter size.
     mnistsamp = 0   # Number of mnist samples to add
     
-
-    image_path_list, label_list, outputPath, author_id = create_img_label_list(top_dir,iamdataset, mode, words, author_number, remove_punc)
-    image_path_list1, label_list1, _         , _         = create_img_label_list(top_dir,dreaddataset, mode, words, author_number, remove_punc)
-    image_path_list+=image_path_list1
-    label_list+=label_list1
+    image_path_list, label_list, outputPath, author_id = \
+                create_img_label_list(top_dir,iamdataset, mode, words, author_number, remove_punc)
+    image_path_list_dread, label_list_dread, _       , _         = \
+                create_img_label_list(top_dir,'dreadclean', mode, words, author_number, remove_punc)
+    image_path_list_dreadnum, label_list_dreadnum, _       , _         = \
+                create_img_label_list(top_dir,'dreadcleannodash', mode, words, author_number, remove_punc)
+                
+    image_path_list += image_path_list_dread + image_path_list_dreadnum
+    label_list += label_list_dread + label_list_dreadnum
+    
     ctrdf = pd.DataFrame(Counter(list(''.join(label_list))).most_common(), columns = ['token', 'count'])
     ctrdf = ctrdf.sort_values('token').reset_index(drop= True)
     print(ctrdf)
@@ -460,7 +499,34 @@ if __name__ == '__main__':
         createDict(label_list, top_dir, iamdataset, mode, words, remove_punc)
     printAlphabet(label_list)
     
-    numbers = ['-'.join([''.join(np.random.choice(9, 3).astype(str).tolist()) for i in range(3)]) for i in range(166550)]
-    with open(os.path.join(top_dir, 'Lexicon', 'dread_words.txt'), "w") as file:
-        file.write("\n".join(numbers))
+    # Add to english words
+    lexpath = os.path.join(top_dir, 'Lexicon')
+    engdf = pd.read_csv(f'{lexpath}/english_words_orig.txt', sep ='\t', names = ['words'], dtype = str)
+    engls = engdf.words.tolist()
+    num_words = len(engls) 
+    # Phone numbers
+    areacode = pd.Series(label_list_dread).str.split('-').str[0]
+    random.choice(areacode)
+    
+    def rand_area_code():
+        return ''.join(np.random.choice(9, random.choices([2,3,4], weights=[0.1,0.6,0.3])[0] )\
+                                           .astype(str).tolist())
+    def generate_phone_number(areacode):
+        phonenum =  [rand_area_code() for i in range(3)]
+        if random.randrange(2)==1:
+            phonenum[0] = areacode.sample(1).iloc[0]
+        phonenum = '-'.join(phonenum)
+        return phonenum
+    def generate_number(areacode):
+        num =  [rand_area_code() if random.randrange(4)!=1 else  areacode.sample(1).iloc[0]
+                    for i in range(random.randrange(1,3))]
+        num = ''.join(num)
+        return num
+    
+    phonenums = [ generate_phone_number(areacode) for i in tqdm(range(num_words // 3), total = num_words // 3)]
+    # Regular numbers
+    nums = [ generate_number(areacode) for i in tqdm(range(num_words // 4), total = num_words // 4)]
+    # Write it out
+    pd.DataFrame({'words': engls + phonenums + nums})\
+        .astype(str).to_csv(f'{lexpath}/english_words.txt', index = False)
     
