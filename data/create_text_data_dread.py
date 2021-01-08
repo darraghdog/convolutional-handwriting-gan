@@ -357,7 +357,7 @@ def createDataset(image_path_list, label_list, outputPath, mode, author_id, remo
             len_word = len(label)
             width = int(width * imgH / height)
             new_width = width
-            if resize=='charResize':
+            if (resize=='charResize') & ('dread' not in imagePath):
                 if (width/len_word > (charmaxW-1)) or (width/len_word < charminW) :
                     if discard_wide and width/len_word > 3*((charmaxW-1)):
                         print('%s has a width larger than max image width' % imagePath)
