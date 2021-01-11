@@ -281,6 +281,14 @@ def create_img_label_list(top_dir,dataset, mode, words, author_number, remove_pu
             label = row.number
             image_path_list.append(image_path)
             label_list.append(label)
+    
+    elif dataset=='Appen':
+        anno_file = f'{root_dir}/appen_allcaps.csv'
+        adf = pd.read_csv(anno_file, dtype=str)
+        adf['FILENAME'] = adf['FILENAME'].apply(lambda x: f'{root_dir}/appen_allcaps/{x}')
+        for t,row in adf.dropna().iterrows():
+            image_path_list.append(row.FILENAME)
+            label_list.append(row.IDENTITY)
 
     return image_path_list, label_list, output_dir, author_id
 
@@ -349,15 +357,14 @@ def createDataset(image_path_list, label_list, outputPath, mode, author_id, remo
                 print('%s has a width larger outside the 150 to 500 threshold for numbers'% imagePath)
                 continue
             im = Image.fromarray(immat)
-            im
-        
+
         if resize in ['charResize', 'keepRatio']:
             width, height = im.size
             new_height = imgH - (h_gap * 2)
             len_word = len(label)
             width = int(width * imgH / height)
             new_width = width
-            if (resize=='charResize') & ('dread' not in imagePath):
+            if (resize=='charResize') & ('dread' not in imagePath) & ('Appen' not in imagePath):
                 if (width/len_word > (charmaxW-1)) or (width/len_word < charminW) :
                     if discard_wide and width/len_word > 3*((charmaxW-1)):
                         print('%s has a width larger than max image width' % imagePath)
@@ -492,9 +499,11 @@ if __name__ == '__main__':
                 create_img_label_list(top_dir,'dreadclean', mode, words, author_number, remove_punc)
     image_path_list_dreadnum, label_list_dreadnum, _       , _         = \
                 create_img_label_list(top_dir,'dreadcleannodash', mode, words, author_number, remove_punc)
+    image_path_list_appen, label_list_appen, _       , _         = \
+                create_img_label_list(top_dir,'Appen', mode, words, author_number, remove_punc)
                 
-    image_path_list += image_path_list_dread + image_path_list_dreadnum
-    label_list += label_list_dread + label_list_dreadnum
+    image_path_list += image_path_list_dread + image_path_list_dreadnum + image_path_list_appen
+    label_list += label_list_dread + label_list_dreadnum + label_list_appen
     
     ctrdf = pd.DataFrame(Counter(list(''.join(label_list))).most_common(), columns = ['token', 'count'])
     ctrdf = ctrdf.sort_values('token').reset_index(drop= True)
@@ -534,6 +543,6 @@ if __name__ == '__main__':
     # Regular numbers
     nums = [ generate_number(areacode) for i in tqdm(range(num_words // 4), total = num_words // 4)]
     # Write it out
-    pd.DataFrame({'words': engls + phonenums + nums})\
+    pd.DataFrame({'words': engls + phonenums + nums + label_list_appen * 5})\
         .astype(str).to_csv(f'{lexpath}/english_words.txt', index = False)
     
