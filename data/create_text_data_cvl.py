@@ -219,6 +219,7 @@ def createDataset(image_path_list, label_list, outputPath, mode, author_id, remo
     env = lmdb.open(outputPath, map_size=1099511627776)
     cache = {}
     cnt = 1
+    widthls = []
 
     for i in tqdm(range(nSamples)):
         imagePath = image_path_list[i]
@@ -228,6 +229,7 @@ def createDataset(image_path_list, label_list, outputPath, mode, author_id, remo
             continue
         try:
             im = Image.open(imagePath)
+            
         except:
             continue
         if resize in ['charResize', 'keepRatio']:
@@ -254,6 +256,7 @@ def createDataset(image_path_list, label_list, outputPath, mode, author_id, remo
             new_im = Image.new("RGB", (new_width+init_gap, imgH), color=(256,256,256))
             new_im.paste(im, (abs(init_w), h_gap))
             im = new_im
+            widthls.append(im.size[0])
 
         imgByteArr = io.BytesIO()
         im.save(imgByteArr, format='tiff')
