@@ -228,7 +228,7 @@ def createDataset(image_path_list, label_list, outputPath, mode, author_id, remo
             print('%s does not exist' % imagePath)
             continue
         try:
-            im = Image.open(imagePath)
+            im = Image.open(imagePath).convert('LA')
             
         except:
             continue
@@ -332,8 +332,11 @@ if __name__ == '__main__':
     h_gap = 0           # Insert a gap below and above the text
     discard_wide = True # Discard images which have a character width 3 times larger than the maximum allowed character size (instead of resizing them) - this helps discard outlier images
     discard_narr = True # Discard images which have a character width 3 times smaller than the minimum allowed charcter size.
+    nsamples = 50000
 
     image_path_list, label_list, outputPath, author_id = create_img_label_list(top_dir,dataset, mode, words, author_number, remove_punc)
+    image_path_list, label_list  = image_path_list[:nsamples], label_list[:nsamples]
+
     # in a previous version we also cut the white edges of the image to keep a tight rectangle around the word but it
     # seems in all the datasets we use this is already the case so I removed it. If there are problems maybe we should add this back.
     createDataset(image_path_list, label_list, outputPath, mode, author_id, remove_punc, resize, imgH, init_gap, h_gap, charminW, charmaxW, discard_wide, discard_narr, labeled)
