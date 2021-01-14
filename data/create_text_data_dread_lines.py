@@ -520,32 +520,8 @@ if __name__ == '__main__':
     
     # Add to english words
     lexpath = os.path.join(top_dir, 'Lexicon')
-    engdf = pd.read_csv(f'{lexpath}/english_words_orig.txt', sep ='\t', names = ['words'], dtype = str)
-    engls = engdf.words.tolist()
-    num_words = len(engls) 
-    # Phone numbers
-    areacode = pd.Series(label_list_dread).str.split('-').str[0]
-    random.choice(areacode)
+    pd.DataFrame({'words': label_list})\
+            .astype(str).to_csv(f'{lexpath}/english_lines.txt', index = False)
     
-    def rand_area_code():
-        return ''.join(np.random.choice(9, random.choices([2,3,4], weights=[0.1,0.6,0.3])[0] )\
-                                           .astype(str).tolist())
-    def generate_phone_number(areacode):
-        phonenum =  [rand_area_code() for i in range(3)]
-        if random.randrange(2)==1:
-            phonenum[0] = areacode.sample(1).iloc[0]
-        phonenum = '-'.join(phonenum)
-        return phonenum
-    def generate_number(areacode):
-        num =  [rand_area_code() if random.randrange(4)!=1 else  areacode.sample(1).iloc[0]
-                    for i in range(random.randrange(1,3))]
-        num = ''.join(num)
-        return num
     
-    phonenums = [ generate_phone_number(areacode) for i in tqdm(range(num_words // 3), total = num_words // 3)]
-    # Regular numbers
-    nums = [ generate_number(areacode) for i in tqdm(range(num_words // 4), total = num_words // 4)]
-    # Write it out
-    pd.DataFrame({'words': engls + phonenums + nums + label_list_appen * 5})\
-        .astype(str).to_csv(f'{lexpath}/english_words.txt', index = False)
     
