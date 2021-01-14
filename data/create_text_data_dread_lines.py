@@ -285,7 +285,7 @@ def create_img_label_list(top_dir,dataset, mode, words, author_number, remove_pu
     elif dataset=='Appen':
         anno_file = f'{root_dir}/appen_allcaps.csv'
         adf = pd.read_csv(anno_file, dtype=str)
-        adf['FILENAME'] = adf['FILENAME'].apply(lambda x: f'{root_dir}/appen_allcapstrn/{x}')
+        adf['FILENAME'] = adf['FILENAME'].apply(lambda x: f'{root_dir}/appen_allcaps/{x}')
         for t,row in adf.dropna().iterrows():
             image_path_list.append(row.FILENAME)
             label_list.append(row.IDENTITY)
