@@ -99,12 +99,15 @@ class ScrabbleGANBaseModel(BaseModel):
                     word=word.decode("utf-8")
                 except:
                     continue
-                if len(word)<20:
+                if 'lines' in opt.lex:
                     lex.append(word)
+                else:
+                    if len(word)<20:
+                        lex.append(word)
             self.lex = lex
         else:
             raise ValueError('could not load lexicon ')
-        self.fixed_noise_size = 10
+        self.fixed_noise_size = 12
         self.fixed_noise, self.fixed_fake_labels = prepare_z_y(self.fixed_noise_size, opt.dim_z,
                                        len(self.lex), device=self.device,
                                        fp16=opt.G_fp16, seed=opt.seed)
@@ -189,7 +192,7 @@ class ScrabbleGANBaseModel(BaseModel):
             sim_preds = self.OCRconverter.decode(preds.data, preds_size.data, raw=False)
             raw_preds = self.OCRconverter.decode(preds.data, preds_size.data, raw=True)
             print('######## real images OCR prediction ########')
-            for i in range(min(3, len(self.label))):
+            for i in range(min(12, len(self.label))):
                 print('%-20s => %-20s, gt: %-20s' % (
                     raw_preds[i], sim_preds[i], self.label[i].decode('utf-8', 'strict')))
                 self.netOCR.train()
