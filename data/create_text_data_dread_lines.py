@@ -521,7 +521,7 @@ if __name__ == '__main__':
     # Add to english words
     lexpath = os.path.join(top_dir, 'Lexicon')
     pd.DataFrame({'words': label_list})\
-            .astype(str).to_csv(f'{lexpath}/english_lines.txt', index = False)
+            .astype(str).to_csv(f'{lexpath}/english_lines.txt', index = False, sep = '|')
     
     
     
