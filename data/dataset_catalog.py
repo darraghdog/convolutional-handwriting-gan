@@ -9,6 +9,10 @@ datasets = {"RIMEScharH32W16": _DATA_ROOT+'RIMES/h32char16to17/tr',
             "IAMcharH32W16rmPunct": _DATA_ROOT+'IAM/words/h32char16to17/tr_removePunc',
             "IAMlinescharH32W16rmPunct": _DATA_ROOT+'IAM/lines/h32char16to17/tr_removePunc',
             "IAMlinesftunecharH32W16rmPunct": _DATA_ROOT+'IAM/lines_finetune/h32char16to17/tr_removePunc',
+            "IAMlinesftuneonlycharH32W16rmPunct": _DATA_ROOT+'IAM/lines_finetuneonly/h32char16to17/tr_removePunc',
+            
+            
+            
             "IAMcharH32rmPunct": _DATA_ROOT+'IAM/words/h32/tr_removePunc',
             "IAMcharH32rmPunct_te": _DATA_ROOT+'IAM/words/h32/te_removePunc',
             "IAMcharH32rmPunct_val1": _DATA_ROOT+'IAM/words/h32/va1',
