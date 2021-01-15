@@ -532,7 +532,7 @@ if __name__ == '__main__':
     print(ctrdf)
     # in a previous version we also cut the white edges of the image to keep a tight rectangle around the word but it
     # seems in all the datasets we use this is already the case so I removed it. If there are problems maybe we should add this back.
-    outputPath += 'lines_finetuneonly'
+    outputPath = 'lines_finetuneonly'
     createDataset(image_path_list, label_list, outputPath, mode, author_id, remove_punc, resize, imgH, init_gap, h_gap, charminW, charmaxW, discard_wide, discard_narr, labeled)
     if create_Dict:
         createDict(label_list, top_dir, iamdataset, mode, words, remove_punc)
