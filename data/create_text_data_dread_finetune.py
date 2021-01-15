@@ -35,6 +35,21 @@ pd.set_option('display.max_rows',1000)
 pd.set_option('display.width', 1000)
 pd.set_option('display.float_format', lambda x: '%.3f' % x)
 
+def replace_specials(s):
+    substitutes = {"‘": "'", 
+                   "`": "'", 
+                   "…": "...", 
+                   "=":":", 
+                   "”":'"', 
+                   "“":'"', 
+                   "~":"-", 
+                   "–":"-", 
+                   "’":"'", 
+                   "[":"(", 
+                   "]":")" }
+    for k, v in substitutes.items():
+        s = s.replace(k, v)
+    return s
 
 def remove_space(img, threshold = 40, kernel_size = 3, keepprop = 6, vborder = 3, resize = False):
     # Filter horizontal
@@ -296,13 +311,11 @@ def create_img_label_list(top_dir,dataset, mode, words, author_number, remove_pu
                         names = ['fname', 'label'])\
                           .assign(batch = f.split('/')[-1][:6]) \
                         for t,f in enumerate(ftfiles)], 0)
-        substitutes = {"‘": "'", "`": "'", "…": "..."}
+
         for t, row in ftdf.iterrows():
             fname = f'{root_dir}/finetune/{row.batch}/{row.fname}'
             image_path_list.append(fname)
-            for k, v in substitutes.items():
-                row.label = row.label.replace(k, v)
-            label_list.append(row.label)
+            label_list.append(replace_specials(row.label))
         
 
     return image_path_list, label_list, output_dir, author_id
