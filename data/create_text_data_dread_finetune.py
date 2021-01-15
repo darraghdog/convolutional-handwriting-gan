@@ -299,7 +299,7 @@ def create_img_label_list(top_dir,dataset, mode, words, author_number, remove_pu
         for t, row in ftdf.iterrows():
             fname = f'{root_dir}/finetune/{row.batch}/{row.fname}'
             image_path_list.append(fname)
-            label_list.append(row.label)
+            label_list.append(row.label.replace("’", "'").replace("`", "'"))
         
 
     return image_path_list, label_list, output_dir, author_id
