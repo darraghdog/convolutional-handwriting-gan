@@ -38,6 +38,7 @@ pd.set_option('display.float_format', lambda x: '%.3f' % x)
 def replace_specials(s):
     substitutes = {"‘": "'", 
                    "`": "'", 
+                   "!": "", 
                    "…": "...", 
                    "=":":", 
                    "”":'"', 
