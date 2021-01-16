@@ -113,7 +113,7 @@ class ScrabbleGANBaseModel(BaseModel):
                                        fp16=opt.G_fp16, seed=opt.seed)
         self.fixed_noise.sample_()
         self.fixed_fake_labels.sample_()
-        self.rep_dict = {"'":"", '"':'', ' ':'_', ';':'', '.':''}
+        self.rep_dict = {"'":"", '"':'', ' ':'_', ';':'', '.':'', ',':''}
         fixed_words_fake = [self.lex[int(i)].encode('utf-8') for i in self.fixed_fake_labels]
         self.fixed_text_encode_fake, self.fixed_text_len = self.netconverter.encode(fixed_words_fake)
         if self.opt.one_hot:
