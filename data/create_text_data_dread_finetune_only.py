@@ -354,9 +354,15 @@ def createDataset(image_path_list, label_list, outputPath, mode, author_id, remo
         except:
             continue
         
-        if 'dread' in imagePath:
+        if ('finetune' in imagePath):
             immat = np.array(im.convert('RGB'))
-            if 'clean' not in imagePath:
+            immat = 255 - immat
+            immat = cv2.cvtColor(immat, cv2.COLOR_BGR2GRAY)
+            im = Image.fromarray(immat)
+        
+        if ('dread' in imagePath):
+            immat = np.array(im.convert('RGB'))
+            if ('clean' not in imagePath):
                 immat = remove_border(immat)
             try:
                 if 'cleannodash' not in imagePath:
