@@ -37,7 +37,7 @@ def generate_image(word = 'meet', seed = None, device = device):
     z, _ = prepare_z_y(1, 128, 80, device=device, seed=seed)
     with torch.no_grad():
         res = model.forward(z=z, y=words)
-    res = res.detach().numpy()[0, 0] * 255
+    res = res.detach().cpu().numpy()[0, 0] * 255
     im = np.array(Image.fromarray(res).convert('RGB'))
     return im
 
