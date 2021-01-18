@@ -3,6 +3,7 @@ import platform
 import sys
 PATH = '/Users/dhanley/Documents/scrgan/' \
     if platform.system() == 'Darwin' else '/mount/scrgan'
+device = 'cpu' if platform.system() == 'Darwin' else 'cuda'
 os.chdir(PATH)
 sys.path.append(PATH)
 from PIL import Image
@@ -20,6 +21,7 @@ import albumentations as A
 from datasets import list_datasets, load_dataset, list_metrics, load_metric
 import re, string
 import pandas as pd
+
 
 def get_word(word):
     encoded = [char_to_int[char] for char in word]
