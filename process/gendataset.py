@@ -67,7 +67,7 @@ def corpus_to_samples(corpus, minlen = 36):
     return yset
 
 random.seed(0)
-NSAMP = 20
+NSAMP = 10000
 OUTDIR = 'Datasets/generative'
 if not os.path.exists(OUTDIR):
     os.makedirs(OUTDIR)
